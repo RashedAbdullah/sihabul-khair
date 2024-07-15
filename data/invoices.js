@@ -111,7 +111,7 @@ export const invoices = [
     invoice: "০৭",
     memberName: "আঃ আওয়াল",
     post: "সহ-সভাপতি",
-    totalShare: 1,
+    totalShare: 2,
     July: 3000,
     August: 0,
     September: 0,
