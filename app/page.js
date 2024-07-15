@@ -14,7 +14,7 @@ export default function Home() {
         <div className="flex flex-col justify-center align-middle items-center gap-10 lg:mt-32 text-lg">
           <div className="flex flex-col justify-center items-center align-middle">
             <h2 className="lg:text-4xl text-3xl">সিহাবুল খায়ের ফাউন্ডেশন</h2>
-            <p>(ঐক্য, সম্প্রীতি ও শাতি প্রতিষ্ঠার প্রত্যয়ে)</p>
+            <p>(ঐক্য, সম্প্রীতি ও শান্তি প্রতিষ্ঠার প্রত্যয়ে)</p>
           </div>
           <div>
             <p>

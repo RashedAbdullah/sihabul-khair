@@ -34,7 +34,9 @@ const MembersPage = () => {
               <TableCell>{invoice.invoice}</TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
-              <TableCell>{getEngToBnNumber(invoice.totalShare)}</TableCell>
+              <TableCell className="font-Tiro_Bangla">
+                {getEngToBnNumber(invoice.totalShare)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
