@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { invoices } from "@/data/invoices";
 import { formatPrice } from "@/lib/foramt-amount";
+import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 const MembersPage = () => {
   return (
@@ -33,7 +34,7 @@ const MembersPage = () => {
               <TableCell>{invoice.invoice}</TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
-              <TableCell>{invoice.totalShare}</TableCell>
+              <TableCell>{getEngToBnNumber(invoice.totalShare)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

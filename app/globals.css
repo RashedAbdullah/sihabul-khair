@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-::selection{
+::selection {
   background-color: rgb(10, 30, 49);
   color: white;
 }

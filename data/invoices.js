@@ -3,7 +3,7 @@ export const invoices = [
     invoice: "০১",
     memberName: "সানা উল্লাহ",
     post: "সভাপতি ও শরয়ী সম্পাদক",
-    totalShare: "০১",
+    totalShare: 1,
     July: 1500,
     August: 0,
     September: 0,
@@ -21,7 +21,7 @@ export const invoices = [
     invoice: "০২",
     memberName: "ইমরান রফিক",
     post: "সভাপতি",
-    totalShare: "০১",
+    totalShare: 1,
     July: 0,
     August: 0,
     September: 0,
@@ -39,7 +39,7 @@ export const invoices = [
     invoice: "০৩",
     memberName: "রাশেদ মান্নান",
     post: "একাউন্টিং কালেক্টর ও শরয়ী সম্পাদক",
-    totalShare: "০২",
+    totalShare: 2,
     July: 3000,
     August: 0,
     September: 0,
@@ -57,7 +57,7 @@ export const invoices = [
     invoice: "০৪",
     memberName: "আঃ আহাদ রাশেদ",
     post: "একাউন্টিং কালেক্টর",
-    totalShare: "০১",
+    totalShare: 2,
     July: 1500,
     August: 0,
     September: 0,
@@ -75,7 +75,7 @@ export const invoices = [
     invoice: "০৫",
     memberName: "শহীদুল ইসলাম",
     post: "শরয়ী সম্পাদক",
-    totalShare: "০২",
+    totalShare: 2,
     July: 0,
     August: 0,
     September: 0,
@@ -93,7 +93,7 @@ export const invoices = [
     invoice: "০৬",
     memberName: "রহমতুল্লাহ",
     post: "শরয়ী সম্পাদক",
-    totalShare: "০১",
+    totalShare: 1,
     July: 1500,
     August: 0,
     September: 0,
@@ -111,7 +111,7 @@ export const invoices = [
     invoice: "০৭",
     memberName: "আঃ আওয়াল",
     post: "সহ-সভাপতি",
-    totalShare: "০২",
+    totalShare: 1,
     July: 3000,
     August: 0,
     September: 0,
@@ -129,7 +129,7 @@ export const invoices = [
     invoice: "০৮",
     memberName: "ইব্রাহীম",
     post: "সহ-সভাপতি",
-    totalShare: "০১",
+    totalShare: 1,
     July: 1500,
     August: 0,
     September: 0,
@@ -147,7 +147,7 @@ export const invoices = [
     invoice: "০৯",
     memberName: "আলতাফ",
     post: "একাউন্টিং কালেক্টর",
-    totalShare: "০১",
+    totalShare: 1,
     July: 1500,
     August: 0,
     September: 0,
@@ -165,7 +165,7 @@ export const invoices = [
     invoice: "১০",
     memberName: "ইসমাঈল",
     post: "সদস্য",
-    totalShare: "০১",
+    totalShare: 1,
     July: 1500,
     August: 0,
     September: 0,
@@ -183,7 +183,7 @@ export const invoices = [
     invoice: "১১",
     memberName: "আরিফুল্লাহ",
     post: "সদস্য",
-    totalShare: "০২",
+    totalShare: 2,
     July: 3000,
     August: 0,
     September: 0,
@@ -198,3 +198,21 @@ export const invoices = [
     June: 0,
   },
 ];
+
+export const totalAmounts = invoices.reduce((acc, curr) => {
+  Object.keys(curr).forEach((month) => {
+    if (
+      month !== "invoice" &&
+      month !== "memberName" &&
+      month !== "post" &&
+      month !== "totalShare"
+    ) {
+      acc[month] = (acc[month] || 0) + curr[month];
+    }
+  });
+  return acc;
+}, {});
+
+export const totalShares = invoices.reduce((accumulator, current) => {
+  return accumulator + current.totalShare;
+}, 0);

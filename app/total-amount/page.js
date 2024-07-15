@@ -11,24 +11,9 @@ import {
 } from "@/components/ui/table";
 import { formatPrice } from "@/lib/foramt-amount";
 import { invoices } from "@/data/invoices";
+import { totalAmounts } from "@/data/invoices";
 
 const TotalAmount = () => {
-  const totalAmounts = invoices.reduce((acc, curr) => {
-    Object.keys(curr).forEach((month) => {
-      if (
-        month !== "invoice" &&
-        month !== "memberName" &&
-        month !== "post" &&
-        month !== "totalShare"
-      ) {
-        acc[month] = (acc[month] || 0) + curr[month];
-      }
-    });
-    return acc;
-  }, {});
-
-
-
   return (
     <div className="container">
       <PageTitle>মোট অর্থ</PageTitle>
@@ -63,55 +48,55 @@ const TotalAmount = () => {
             <TableRow key={invoice.invoice}>
               <TableCell>{invoice.invoice}</TableCell>
               <TableCell>{invoice.memberName}</TableCell>
-              <TableCell className={`${invoice.July <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.July <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.July)}
               </TableCell>
-              <TableCell className={`${invoice.August <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.August <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.August)}
               </TableCell>
               <TableCell
-                className={`${invoice.September <= 0 && "text-red-500"}`}
+                className={`${invoice.September <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.September)}
               </TableCell>
               <TableCell
-                className={`${invoice.October <= 0 && "text-red-500"}`}
+                className={`${invoice.October <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.October)}
               </TableCell>
               <TableCell
-                className={`${invoice.November <= 0 && "text-red-500"}`}
+                className={`${invoice.November <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.November)}
               </TableCell>
               <TableCell
-                className={`${invoice.December <= 0 && "text-red-500"}`}
+                className={`${invoice.December <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.December)}
               </TableCell>
               <TableCell
-                className={`${invoice.January <= 0 && "text-red-500"}`}
+                className={`${invoice.January <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.January)}
               </TableCell>
               <TableCell
-                className={`${invoice.February <= 0 && "text-red-500"}`}
+                className={`${invoice.February <= 0 && "text-red-500"} font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.February)}
               </TableCell>
-              <TableCell className={`${invoice.March <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.March <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.March)}
               </TableCell>
-              <TableCell className={`${invoice.April <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.April <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.April)}
               </TableCell>
-              <TableCell className={`${invoice.May <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.May <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.May)}
               </TableCell>
-              <TableCell className={`${invoice.June <= 0 && "text-red-500"}`}>
+              <TableCell className={`${invoice.June <= 0 && "text-red-500"} font-Tiro_Bangla`}>
                 {formatPrice(invoice.June)}
               </TableCell>
-              <TableCell>
+              <TableCell className="font-Tiro_Bangla">
                 {formatPrice(
                   invoice.July +
                     invoice.August +
@@ -133,7 +118,7 @@ const TotalAmount = () => {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={2}>সর্বমোট</TableCell>
-            <TableCell colSpan={12} className="text-right">
+            <TableCell colSpan={14} className="text-right font-Tiro_Bangla">
               {formatPrice(
                 totalAmounts.July +
                   totalAmounts.August +
