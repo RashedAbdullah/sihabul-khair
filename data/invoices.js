@@ -197,6 +197,24 @@ export const invoices = [
     May: 0,
     June: 0,
   },
+  {
+    invoice: "১২",
+    memberName: "মাহমুদ ফারহান",
+    post: "সদস্য",
+    totalShare: 3,
+    July: 4500,
+    August: 4500,
+    September: 4500,
+    October: 4500,
+    November: 4500,
+    December: 0,
+    January: 0,
+    February: 0,
+    March: 0,
+    April: 0,
+    May: 0,
+    June: 0,
+  },
 ];
 
 export const totalAmounts = invoices.reduce((acc, curr) => {
