@@ -22,7 +22,7 @@ export const invoices = [
     memberName: "ইমরান রফিক",
     post: "সভাপতি",
     totalShare: 1,
-    July: 0,
+    July: 1500,
     August: 0,
     September: 0,
     October: 0,
