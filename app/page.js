@@ -3,11 +3,18 @@ import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import IslamicBanking from "@/public/islamic-banking.jpg";
-import { invoices, totalAmounts, totalShares } from "@/data/invoices";
 import { formatPrice } from "@/lib/foramt-amount";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
+import {
+  getInvoices,
+  getTotalAmount,
+  getTotalShare,
+} from "@/actions/getInvices";
 
-export default function Home() {
+export default async function Home() {
+  const invoices = await getInvoices();
+  const totalAmounts = getTotalAmount(invoices);
+
   return (
     <main>
       <div className="container lg:grid grid-cols-2 flex flex-col-reverse">
@@ -58,27 +65,14 @@ export default function Home() {
         <div className="lg:border-r-2 border-b-2"></div>
         <div className="p-4">
           <h3 className="text-4xl font-Tiro_Bangla">
-            {getEngToBnNumber(totalShares)}
+            {getEngToBnNumber(getTotalShare(invoices))}
           </h3>
           <h3>শেয়ার সংখ্যা</h3>
         </div>
         <div className="lg:border-r-2 border-b-2"></div>
         <div className="p-4">
           <h3 className="text-4xl font-Tiro_Bangla">
-            {formatPrice(
-              totalAmounts.July +
-                totalAmounts.August +
-                totalAmounts.September +
-                totalAmounts.October +
-                totalAmounts.November +
-                totalAmounts.December +
-                totalAmounts.January +
-                totalAmounts.February +
-                totalAmounts.March +
-                totalAmounts.April +
-                totalAmounts.May +
-                totalAmounts.June
-            )}
+            {formatPrice(getTotalAmount(invoices))}
           </h3>
           <h3>টোটাল এমাউন্ট</h3>
         </div>

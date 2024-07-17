@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import MobileMenu from "./mobile-menu";
+import AdminDialog from "./admin-dialog";
 
 const Navbar = () => {
   return (
@@ -22,9 +23,7 @@ const Navbar = () => {
             <Link href="/total-amount">মোট অর্থ</Link>
           </li>
         </ul>
-        <Link href="/admin-pannel" className="hidden lg:block">
-          <Button>এডমিন প্যানেল</Button>
-        </Link>
+        <AdminDialog />
 
         <MobileMenu />
       </div>

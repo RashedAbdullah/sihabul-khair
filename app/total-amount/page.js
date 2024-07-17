@@ -10,10 +10,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatPrice } from "@/lib/foramt-amount";
-import { invoices } from "@/data/invoices";
-import { totalAmounts } from "@/data/invoices";
+import { getEngToBnNumber } from "@/utils/getEngToBn";
+import { getInvoices, getTotalAmount } from "@/actions/getInvices";
 
-const TotalAmount = () => {
+const TotalAmountPage = async () => {
+  const invoices = await getInvoices();
   return (
     <div className="container">
       <PageTitle>মোট অর্থ</PageTitle>
@@ -44,56 +45,94 @@ const TotalAmount = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell>{invoice.invoice}</TableCell>
+          {invoices.map((invoice, ind) => (
+            <TableRow key={ind}>
+              <TableCell className="font-Tiro_Bangla">
+                {getEngToBnNumber(ind + 1)}
+              </TableCell>
               <TableCell>{invoice.memberName}</TableCell>
-              <TableCell className={`${invoice.July <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.July <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.July)}
               </TableCell>
-              <TableCell className={`${invoice.August <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.August <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.August)}
               </TableCell>
               <TableCell
-                className={`${invoice.September <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.September <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.September)}
               </TableCell>
               <TableCell
-                className={`${invoice.October <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.October <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.October)}
               </TableCell>
               <TableCell
-                className={`${invoice.November <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.November <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.November)}
               </TableCell>
               <TableCell
-                className={`${invoice.December <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.December <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.December)}
               </TableCell>
               <TableCell
-                className={`${invoice.January <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.January <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.January)}
               </TableCell>
               <TableCell
-                className={`${invoice.February <= 0 && "text-red-500"} font-Tiro_Bangla`}
+                className={`${
+                  invoice.February <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
               >
                 {formatPrice(invoice.February)}
               </TableCell>
-              <TableCell className={`${invoice.March <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.March <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.March)}
               </TableCell>
-              <TableCell className={`${invoice.April <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.April <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.April)}
               </TableCell>
-              <TableCell className={`${invoice.May <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.May <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.May)}
               </TableCell>
-              <TableCell className={`${invoice.June <= 0 && "text-red-500"} font-Tiro_Bangla`}>
+              <TableCell
+                className={`${
+                  invoice.June <= 0 && "text-red-500"
+                } font-Tiro_Bangla`}
+              >
                 {formatPrice(invoice.June)}
               </TableCell>
               <TableCell className="font-Tiro_Bangla">
@@ -119,20 +158,7 @@ const TotalAmount = () => {
           <TableRow>
             <TableCell colSpan={2}>সর্বমোট</TableCell>
             <TableCell colSpan={14} className="text-right font-Tiro_Bangla">
-              {formatPrice(
-                totalAmounts.July +
-                  totalAmounts.August +
-                  totalAmounts.September +
-                  totalAmounts.October +
-                  totalAmounts.November +
-                  totalAmounts.December +
-                  totalAmounts.January +
-                  totalAmounts.February +
-                  totalAmounts.March +
-                  totalAmounts.April +
-                  totalAmounts.May +
-                  totalAmounts.June
-              )}
+              {formatPrice(getTotalAmount(invoices))}
             </TableCell>
           </TableRow>
         </TableFooter>
@@ -141,4 +167,4 @@ const TotalAmount = () => {
   );
 };
 
-export default TotalAmount;
+export default TotalAmountPage;

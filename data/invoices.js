@@ -1,6 +1,6 @@
 export const invoices = [
   {
-    invoice: "০১",
+    invoice: 1,
     memberName: "সানা উল্লাহ",
     post: "সভাপতি ও শরয়ী সম্পাদক",
     totalShare: 1,
@@ -18,7 +18,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০২",
+    invoice: 2,
     memberName: "ইমরান রফিক",
     post: "সভাপতি",
     totalShare: 1,
@@ -36,7 +36,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৩",
+    invoice: 3,
     memberName: "রাশেদ মান্নান",
     post: "একাউন্টিং কালেক্টর ও শরয়ী সম্পাদক",
     totalShare: 2,
@@ -54,7 +54,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৪",
+    invoice: 4,
     memberName: "আঃ আহাদ রাশেদ",
     post: "একাউন্টিং কালেক্টর",
     totalShare: 2,
@@ -72,7 +72,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৫",
+    invoice: 5,
     memberName: "শহীদুল ইসলাম",
     post: "শরয়ী সম্পাদক",
     totalShare: 2,
@@ -90,7 +90,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৬",
+    invoice: 6,
     memberName: "রহমতুল্লাহ",
     post: "শরয়ী সম্পাদক",
     totalShare: 1,
@@ -108,7 +108,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৭",
+    invoice: 7,
     memberName: "আঃ আওয়াল",
     post: "সহ-সভাপতি",
     totalShare: 2,
@@ -126,7 +126,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৮",
+    invoice: 8,
     memberName: "ইব্রাহীম",
     post: "সহ-সভাপতি",
     totalShare: 1,
@@ -144,7 +144,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "০৯",
+    invoice: 9,
     memberName: "আলতাফ",
     post: "একাউন্টিং কালেক্টর",
     totalShare: 1,
@@ -162,7 +162,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "১০",
+    invoice: 10,
     memberName: "ইসমাঈল",
     post: "সদস্য",
     totalShare: 1,
@@ -180,7 +180,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "১১",
+    invoice: 11,
     memberName: "আরিফুল্লাহ",
     post: "সদস্য",
     totalShare: 2,
@@ -198,7 +198,7 @@ export const invoices = [
     June: 0,
   },
   {
-    invoice: "১২",
+    invoice: 12,
     memberName: "মাহমুদ ফারহান",
     post: "সদস্য",
     totalShare: 3,
@@ -216,21 +216,3 @@ export const invoices = [
     June: 0,
   },
 ];
-
-export const totalAmounts = invoices.reduce((acc, curr) => {
-  Object.keys(curr).forEach((month) => {
-    if (
-      month !== "invoice" &&
-      month !== "memberName" &&
-      month !== "post" &&
-      month !== "totalShare"
-    ) {
-      acc[month] = (acc[month] || 0) + curr[month];
-    }
-  });
-  return acc;
-}, {});
-
-export const totalShares = invoices.reduce((accumulator, current) => {
-  return accumulator + current.totalShare;
-}, 0);

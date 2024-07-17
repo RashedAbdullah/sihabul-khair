@@ -1,19 +1,18 @@
+import { getInvoices } from "@/actions/getInvices";
 import PageTitle from "@/components/page-title";
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { invoices } from "@/data/invoices";
-import { formatPrice } from "@/lib/foramt-amount";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 
-const MembersPage = () => {
+const MembersPage = async () => {
+  const invoices = await getInvoices();
   return (
     <div className="container">
       <PageTitle>সদস্যবৃন্দের তালিকা</PageTitle>
@@ -29,9 +28,11 @@ const MembersPage = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell>{invoice.invoice}</TableCell>
+          {invoices.map((invoice, ind) => (
+            <TableRow key={ind}>
+              <TableCell className="font-Tiro_Bangla">
+                {getEngToBnNumber(ind + 1)}
+              </TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
               <TableCell className="font-Tiro_Bangla">
