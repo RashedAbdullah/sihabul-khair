@@ -1,3 +1,6 @@
+"use server";
+
+import { revalidateTag } from "next/cache";
 import { database_connection } from "@/database/database-connection";
 import { invoiceModel } from "@/models/invoice-model";
 import {
@@ -7,6 +10,7 @@ import {
 
 const getInvoices = async () => {
   try {
+    revalidateTag("collection");
     await database_connection();
 
     const invoices = await invoiceModel.find().lean();
