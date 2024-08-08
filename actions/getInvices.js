@@ -10,7 +10,7 @@ import {
 
 const getInvoices = async () => {
   try {
-    revalidateTag("collection");
+    revalidateTag("no-store");
     await database_connection();
 
     const invoices = await invoiceModel.find().lean();
