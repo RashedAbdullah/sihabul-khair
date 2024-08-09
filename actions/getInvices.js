@@ -23,6 +23,7 @@ const getInvoices = async () => {
 
 const getSingleInvoice = async (memberId) => {
   try {
+    
     await database_connection();
 
     const invoice = await invoiceModel.findById(memberId).lean();
