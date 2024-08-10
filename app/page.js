@@ -13,7 +13,7 @@ import {
 
 export default async function Home() {
   const invoices = await getInvoices();
-  const totalAmounts = getTotalAmount(invoices);
+
 
   return (
     <main>
