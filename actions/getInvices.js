@@ -2,14 +2,15 @@
 
 import { database_connection } from "@/database/database-connection";
 import { invoiceModel } from "@/models/invoice-model";
+import { cookies } from "next/headers";
 import {
   replaceMongoIdInArray,
   replaceMongoIdInObject,
 } from "@/utils/replace-arr-obj";
 
 const getInvoices = async () => {
+  const cookie = cookies().get("theme");
   try {
-  
     await database_connection();
 
     const invoices = await invoiceModel.find().lean();
@@ -22,7 +23,6 @@ const getInvoices = async () => {
 
 const getSingleInvoice = async (memberId) => {
   try {
-
     await database_connection();
 
     const invoice = await invoiceModel.findById(memberId).lean();
