@@ -9,6 +9,7 @@ import {
 
 const getInvoices = async () => {
   try {
+  
     await database_connection();
 
     const invoices = await invoiceModel.find().lean();
