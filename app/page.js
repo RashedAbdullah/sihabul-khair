@@ -14,7 +14,6 @@ import {
 export default async function Home() {
   const invoices = await getInvoices();
 
-
   return (
     <main>
       <div className="container lg:grid grid-cols-2 flex flex-col-reverse">
