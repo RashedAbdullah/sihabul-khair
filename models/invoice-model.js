@@ -18,6 +18,10 @@ const InvoiceSchema = new Schema({
     type: Number,
     required: true,
   },
+  membershipDate: {
+    type: String,
+    required: true,
+  },
   July: {
     type: Number,
     required: true,

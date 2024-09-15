@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createNewInvoice } from "./getInvices";
+import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 export const handleNewMember = async (event) => {
   const invoices = {
@@ -9,6 +10,11 @@ export const handleNewMember = async (event) => {
     memberName: event.get("memberName"),
     post: event.get("post"),
     totalShare: Number(event.get("totalShare")),
+    membershipDate: `${`${getEngToBnNumber(
+      new Date().getDate()
+    )} - ${getEngToBnNumber(new Date().getMonth())} - ${getEngToBnNumber(
+      new Date().getFullYear()
+    )}`}`,
     July: Number(event.get("July")),
     August: Number(event.get("August")),
     September: Number(event.get("September")),

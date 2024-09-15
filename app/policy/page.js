@@ -3,9 +3,6 @@ import { policies } from "@/data/policy";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 const PolicyPage = () => {
-  // console.log(
-  //   policies.map((policy) => policy.includes("(প্রতি মাসের ১৫ তারিখের ভেতর)"))
-  // );
   return (
     <div className="container text-lg">
       <PageTitle>নীতিমালা</PageTitle>

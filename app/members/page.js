@@ -25,6 +25,7 @@ const MembersPage = async () => {
             <TableHead className="">সদস্য</TableHead>
             <TableHead>পদ</TableHead>
             <TableHead>শেয়ার</TableHead>
+            <TableHead>মেম্বারশীপ ডেট</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -38,6 +39,7 @@ const MembersPage = async () => {
               <TableCell className="font-Tiro_Bangla">
                 {getEngToBnNumber(invoice.totalShare)}
               </TableCell>
+              <TableCell>{invoice.membershipDate} ইং</TableCell>
             </TableRow>
           ))}
         </TableBody>
