@@ -13,6 +13,7 @@ import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 const MembersPage = async () => {
   const invoices = await getInvoices();
+
   return (
     <div className="container">
       <PageTitle>সদস্যবৃন্দের তালিকা</PageTitle>
@@ -25,6 +26,7 @@ const MembersPage = async () => {
             <TableHead className="">সদস্য</TableHead>
             <TableHead>পদ</TableHead>
             <TableHead>শেয়ার</TableHead>
+            <TableHead>মোট জমা</TableHead>
             <TableHead>মেম্বারশীপ ডেট</TableHead>
           </TableRow>
         </TableHeader>
@@ -38,6 +40,22 @@ const MembersPage = async () => {
               <TableCell>{invoice.post}</TableCell>
               <TableCell className="font-Tiro_Bangla">
                 {getEngToBnNumber(invoice.totalShare)}
+              </TableCell>
+              <TableCell className="font-Tiro_Bangla">
+                {getEngToBnNumber(
+                  invoice.July +
+                    invoice.August +
+                    invoice.September +
+                    invoice.October +
+                    invoice.November +
+                    invoice.December +
+                    invoice.January +
+                    invoice.February +
+                    invoice.March +
+                    invoice.April +
+                    invoice.May +
+                    invoice.June
+                )}
               </TableCell>
               <TableCell>{invoice.membershipDate} ইং</TableCell>
             </TableRow>
