@@ -57,7 +57,9 @@ const MembersPage = async () => {
                     invoice.June
                 )}
               </TableCell>
-              <TableCell>{invoice.membershipDate} ইং</TableCell>
+              <TableCell className="font-Tiro_Bangla">
+                {invoice.membershipDate} ইং
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
