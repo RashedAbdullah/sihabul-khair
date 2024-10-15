@@ -16,9 +16,6 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    fontFamily: {
-      Tiro_Bangla: "Tiro Bangla",
-    },
     extend: {
       keyframes: {
         "accordion-down": {

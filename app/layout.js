@@ -1,11 +1,11 @@
-import { Hind_Siliguri } from "next/font/google";
+import { Tiro_Bangla } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const hind = Hind_Siliguri({
+const tiroBangla = Tiro_Bangla({
   subsets: ["bengali"],
-  weight: ["300", "400", "500"],
+  weight: ["400"],
 });
 
 export const metadata = {
@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={hind.className}>
+      <body className={tiroBangla.className}>
         <Navbar />
         {children}
         <Footer />

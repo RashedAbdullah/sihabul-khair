@@ -47,95 +47,95 @@ const TotalAmountPage = async () => {
         <TableBody>
           {invoices.map((invoice, ind) => (
             <TableRow key={ind}>
-              <TableCell className="font-Tiro_Bangla">
+              <TableCell>
                 {getEngToBnNumber(ind + 1)}
               </TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell
                 className={`${
                   invoice.July <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                }`}
               >
                 {formatPrice(invoice.July)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.August <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.August)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.September <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.September)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.October <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.October)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.November <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.November)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.December <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.December)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.January <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.January)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.February <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.February)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.March <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.March)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.April <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.April)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.May <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.May)}
               </TableCell>
               <TableCell
                 className={`${
                   invoice.June <= 0 && "text-red-500"
-                } font-Tiro_Bangla`}
+                } `}
               >
                 {formatPrice(invoice.June)}
               </TableCell>
-              <TableCell className="font-Tiro_Bangla">
+              <TableCell className="">
                 {formatPrice(
                   invoice.July +
                     invoice.August +
@@ -157,7 +157,7 @@ const TotalAmountPage = async () => {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={2}>সর্বমোট</TableCell>
-            <TableCell colSpan={14} className="text-right font-Tiro_Bangla">
+            <TableCell colSpan={14} className="text-right ">
               {formatPrice(getTotalAmount(invoices))}
             </TableCell>
           </TableRow>

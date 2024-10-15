@@ -9,7 +9,7 @@ const PolicyPage = () => {
       <div>
         {policies.map((policy, ind) => (
           <div key={ind} className="grid grid-cols-12">
-            <div className="col-span-1 font-Tiro_Bangla">
+            <div className="col-span-1">
               {getEngToBnNumber(ind + 1)}
             </div>
             <div className="col-span-11">
@@ -17,11 +17,11 @@ const PolicyPage = () => {
                 className={`${
                   policy.includes(
                     "যথা সময়ে (প্রতি মাসের ১৫ তারিখের ভেতর) নির্ধারিত টাকা দিতে না পারলে দায়িত্বশীলদেরকে অবগত করবে।"
-                  ) && "font-semibold font-Tiro_Bangla text-red-700"
+                  ) && "font-semibold text-red-700"
                 } ${
                   policy.includes(
                     "পরপর দুই মাস নির্ধারিত টাকা না দিলে সে সমিতির আইন লঙ্ঘনকারী হিসেবে বিবেচিত হবে।"
-                  ) && "font-semibold font-Tiro_Bangla text-red-700"
+                  ) && "font-semibold text-red-700"
                 }`}
               >
                 {policy}

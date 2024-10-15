@@ -54,6 +54,22 @@ const MobileMenu = () => {
                 মোট অর্থ
               </Link>
             </li>
+            <li>
+              <Link
+                href="/expenses"
+                className="p-2 hover:bg-slate-200 transition-all duration-300 w-full block"
+              >
+                ব্যায় বিবরণ
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/investment"
+                className="p-2 hover:bg-slate-200 transition-all duration-300 w-full block"
+              >
+                ইনভেস্টমেন্টস
+              </Link>
+            </li>
           </ul>
           <Link href="/admin-pannel" className="text-end block">
             <Button>এডমিন প্যানেল</Button>

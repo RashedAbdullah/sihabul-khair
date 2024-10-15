@@ -10,7 +10,7 @@ import { formatPrice } from "@/lib/foramt-amount";
 
 const InvestmentPage = async () => {
   const investments = await getInvestments();
-
+  const options = { year: "numeric", month: "long", day: "numeric" };
   return (
     <div className="min-h-screen p-8 container">
       <PageTitle> ইনভেস্টমেন্টস</PageTitle>
@@ -52,54 +52,57 @@ const InvestmentPage = async () => {
                   key={investment.consumerName}
                   className="border-b hover:bg-gray-50"
                 >
-                  <td className="py-4 px-4 text-gray-800">
+                  <td className="py-4 px-4 text-gray-800 text-nowrap">
                     {investment.consumerName}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  <td className="py-4 px-4 text-gray-800">
                     {formatPrice(investment.amount)}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  <td className="py-4 px-4 text-gray-800">
                     {formatPrice(investment.paidAmount)}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  <td className="py-4 px-4 text-gray-800">
                     {formatPrice(investment.amount - investment.paidAmount)}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla text-nowrap">
-                    {new Date(investment.takenDate).toLocaleDateString("bn")} ইং
-                  </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla text-nowrap">
-                    {new Date(investment.paymentLastDate).toLocaleDateString(
-                      "bn"
+                  <td className="py-4 px-4 text-gray-800 text-nowrap">
+                    {new Date(investment.takenDate).toLocaleDateString(
+                      "bn",
+                      options
                     )}{" "}
                     ইং
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  <td className="py-4 px-4 text-gray-800 text-nowrap">
+                    {new Date(investment.paymentLastDate).toLocaleDateString(
+                      "bn",
+                      options
+                    )}{" "}
+                    ইং
+                  </td>
+                  <td className="py-4 px-4 text-gray-800">
                     {formatPrice(investment.profitAmount)}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    চলমান
-                  </td>
+                  <td className="py-4 px-4 text-gray-800">চলমান</td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
               <tr className="font-bold bg-gray-100">
                 <td className="py-4 px-4 text-gray-800">মোট</td>
-                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                <td className="py-4 px-4 text-gray-800">
                   {formatPrice(getTotalInvestment(investments))}
                 </td>
-                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                <td className="py-4 px-4 text-gray-800">
                   {formatPrice(getTotalPaidAmount(investments))}
                 </td>
-                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                <td className="py-4 px-4 text-gray-800">
                   {formatPrice(getTotalDeuAmount(investments))}
                 </td>
                 <td className="py-4 px-4 text-gray-800"></td>
                 <td className="py-4 px-4 text-gray-800"></td>
-                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                <td className="py-4 px-4 text-gray-800">
                   {formatPrice(getTotalProfitAmount(investments))}
                 </td>
-                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla"></td>
+                <td className="py-4 px-4 text-gray-800"></td>
               </tr>
             </tfoot>
           </table>

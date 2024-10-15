@@ -43,12 +43,12 @@ const AdminPannelPage = async () => {
         <TableBody>
           {invoices.map((invoice, ind) => (
             <TableRow key={ind}>
-              <TableCell className="font-Tiro_Bangla">
+              <TableCell >
                 {getEngToBnNumber(ind + 1)}
               </TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
-              <TableCell className="font-Tiro_Bangla">
+              <TableCell>
                 <Link href={`/admin-pannel/${invoice.id}`}>
                   <Button>তথ্য আপডেট করুন</Button>
                 </Link>

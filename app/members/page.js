@@ -33,15 +33,11 @@ const MembersPage = async () => {
         <TableBody>
           {invoices.map((invoice, ind) => (
             <TableRow key={ind}>
-              <TableCell className="font-Tiro_Bangla">
-                {getEngToBnNumber(ind + 1)}
-              </TableCell>
+              <TableCell>{getEngToBnNumber(ind + 1)}</TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
-              <TableCell className="font-Tiro_Bangla">
-                {getEngToBnNumber(invoice.totalShare)}
-              </TableCell>
-              <TableCell className="font-Tiro_Bangla">
+              <TableCell>{getEngToBnNumber(invoice.totalShare)}</TableCell>
+              <TableCell>
                 {getEngToBnNumber(
                   invoice.July +
                     invoice.August +
@@ -57,9 +53,7 @@ const MembersPage = async () => {
                     invoice.June
                 )}
               </TableCell>
-              <TableCell className="font-Tiro_Bangla">
-                {invoice.membershipDate} ইং
-              </TableCell>
+              <TableCell>{invoice.membershipDate} ইং</TableCell>
             </TableRow>
           ))}
         </TableBody>
