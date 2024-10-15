@@ -12,4 +12,41 @@ const getInvestments = async () => {
   }
 };
 
-export { getInvestments };
+const createNewInvest = async (newInvest) => {
+  try {
+    await database_connection();
+    const newInvestmentData = await investmentModel.create(newInvest);
+    return newInvestmentData;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const getTotalInvestment = (investments) => {
+  return investments.reduce((acc, investment) => acc + investment.amount, 0);
+};
+const getTotalPaidAmount = (investments) => {
+  return investments.reduce((acc, investment) => acc + investment.paidAmount, 0);
+};
+const getTotalProfitAmount = (investments) => {
+  return investments.reduce(
+    (acc, investment) => acc + investment.profitAmount,
+    0
+  );
+};
+
+const getTotalDeuAmount = (investments) => {
+  return investments.reduce(
+    (acc, investment) => (acc += investment.amount - investment.paidAmount),
+    0
+  );
+};
+
+export {
+  getInvestments,
+  createNewInvest,
+  getTotalInvestment,
+  getTotalPaidAmount,
+  getTotalProfitAmount,
+  getTotalDeuAmount,
+};

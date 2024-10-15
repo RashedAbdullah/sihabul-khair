@@ -1,57 +1,15 @@
+import {
+  getInvestments,
+  getTotalDeuAmount,
+  getTotalInvestment,
+  getTotalPaidAmount,
+  getTotalProfitAmount,
+} from "@/actions/investment";
 import PageTitle from "@/components/page-title";
-import { getEngToBnNumber } from "@/utils/getEngToBn";
+import { formatPrice } from "@/lib/foramt-amount";
 
 const InvestmentPage = async () => {
-  const investments = [
-    {
-      _id: "1",
-      consumerName: "রহমত উল্লাহ",
-      Amount: 5000,
-      paidAmount: 2500,
-      due: 200,
-      takenDate: "2023-01-15",
-      paymentLastDate: "2023-06-15",
-      profitAmount: 500,
-    },
-    {
-      _id: "2",
-      consumerName: "খালিদ সাইফুল্লাহ",
-      Amount: 10000,
-      paidAmount: 8000,
-      due: 200,
-      takenDate: "2023-03-20",
-      paymentLastDate: "2023-09-20",
-      profitAmount: 800,
-    },
-    {
-      _id: "3",
-      consumerName: "রায়হান আহমদ",
-      Amount: 15000,
-      paidAmount: 15000,
-      due: 200,
-      takenDate: "2022-11-30",
-      paymentLastDate: "2023-05-30",
-      profitAmount: 1500,
-    },
-  ];
-
-  const totalAmount = investments.reduce(
-    (acc, investment) => acc + investment.Amount,
-    0
-  );
-  const totalPaidAmount = investments.reduce(
-    (acc, investment) => acc + investment.paidAmount,
-    0
-  );
-  const totalProfitAmount = investments.reduce(
-    (acc, investment) => acc + investment.profitAmount,
-    0
-  );
-
-  const deuAmount = investments.reduce(
-    (acc, investment) => acc + investment.due,
-    0
-  );
+  const investments = await getInvestments();
 
   return (
     <div className="min-h-screen p-8 container">
@@ -74,42 +32,52 @@ const InvestmentPage = async () => {
                 <th className="py-3 px-4 text-left font-semibold text-gray-700">
                   বকেয়া
                 </th>
-                <th className="py-3 px-4 text-left font-semibold text-gray-700">
+                <th className="py-3 px-4 text-left font-semibold text-gray-700 text-nowrap">
                   নেওয়ার তারিখ
                 </th>
-                <th className="py-3 px-4 text-left font-semibold text-gray-700">
+                <th className="py-3 px-4 text-left font-semibold text-gray-700 text-nowrap">
                   পরিশোধের শেষ ডেট
                 </th>
                 <th className="py-3 px-4 text-left font-semibold text-gray-700">
                   মুনাফা
                 </th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">
+                  হিসাব
+                </th>
               </tr>
             </thead>
             <tbody>
               {investments.map((investment) => (
-                <tr key={investment._id} className="border-b hover:bg-gray-50">
+                <tr
+                  key={investment.consumerName}
+                  className="border-b hover:bg-gray-50"
+                >
                   <td className="py-4 px-4 text-gray-800">
                     {investment.consumerName}
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    ৳{getEngToBnNumber(investment.Amount)}
+                    {formatPrice(investment.amount)}
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    ৳{getEngToBnNumber(investment.paidAmount)}
+                    {formatPrice(investment.paidAmount)}
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    ৳{getEngToBnNumber(investment.due)}
+                    {formatPrice(investment.amount - investment.paidAmount)}
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    {new Date(investment.takenDate).toLocaleDateString("bn")}
+                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla text-nowrap">
+                    {new Date(investment.takenDate).toLocaleDateString("bn")} ইং
                   </td>
-                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla text-nowrap">
                     {new Date(investment.paymentLastDate).toLocaleDateString(
                       "bn"
-                    )}
+                    )}{" "}
+                    ইং
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                    ৳{getEngToBnNumber(investment.profitAmount)}
+                    {formatPrice(investment.profitAmount)}
+                  </td>
+                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                    চলমান
                   </td>
                 </tr>
               ))}
@@ -118,19 +86,20 @@ const InvestmentPage = async () => {
               <tr className="font-bold bg-gray-100">
                 <td className="py-4 px-4 text-gray-800">মোট</td>
                 <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                  ৳{getEngToBnNumber(totalAmount)}
+                  {formatPrice(getTotalInvestment(investments))}
                 </td>
                 <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                  ৳{getEngToBnNumber(totalPaidAmount)}
+                  {formatPrice(getTotalPaidAmount(investments))}
                 </td>
                 <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                  ৳{getEngToBnNumber(deuAmount)}
+                  {formatPrice(getTotalDeuAmount(investments))}
                 </td>
                 <td className="py-4 px-4 text-gray-800"></td>
                 <td className="py-4 px-4 text-gray-800"></td>
                 <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
-                  ৳{getEngToBnNumber(totalProfitAmount)}
+                  {formatPrice(getTotalProfitAmount(investments))}
                 </td>
+                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla"></td>
               </tr>
             </tfoot>
           </table>

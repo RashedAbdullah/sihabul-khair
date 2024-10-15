@@ -6,7 +6,7 @@ const investmentSchema = new Schema(
       type: String,
       required: true,
     },
-    Amount: {
+    amount: {
       type: Number,
       required: true,
     },
@@ -24,6 +24,10 @@ const investmentSchema = new Schema(
     },
     profitAmount: {
       type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
   },

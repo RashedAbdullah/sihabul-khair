@@ -3,17 +3,9 @@ import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import IslamicBanking from "@/public/islamic-banking.jpg";
-import { formatPrice } from "@/lib/foramt-amount";
-import { getEngToBnNumber } from "@/utils/getEngToBn";
-import {
-  getInvoices,
-  getTotalAmount,
-  getTotalShare,
-} from "@/actions/getInvices";
+import TotalAcounting from "@/components/total-accounting";
 
-export default async function Home() {
-  const invoices = await getInvoices();
-
+export default function Home() {
   return (
     <main>
       <div className="container lg:grid grid-cols-2 flex flex-col-reverse">
@@ -30,19 +22,19 @@ export default async function Home() {
               লাভ অথবা সার্বিক সমঝোতায় নির্দিষ্ট কোন খাতে ব্যায়।
             </p>
           </div>
-          <div className="flex lg:gap-4 gap-2">
-            <Link href="/total-amount">
-              <Button className="flex gap-3">
+          <div className="grid grid-cols-4 gap-2">
+            <Link href="/total-amount" className="col-span-4 md:col-span-1">
+              <Button className="flex gap-3 w-full">
                 মোট অর্থ <MoveRight />
               </Button>
             </Link>
-            <Link href="/members">
-              <Button variant="outline" className="flex gap-3">
+            <Link href="/members" className="md:col-span-1 col-span-2">
+              <Button variant="outline" className="flex gap-3 w-full">
                 সদস্যবৃন্দ <MoveRight />
               </Button>
             </Link>
-            <Link href="/policy">
-              <Button variant="outline" className="flex gap-3">
+            <Link href="/policy" className="md:col-span-1 col-span-2">
+              <Button variant="outline" className="flex gap-3 w-full">
                 নীতিমালা <MoveRight />
               </Button>
             </Link>
@@ -54,28 +46,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="flex lg:flex-row flex-col justify-between container mt-10">
-        <div className="p-4">
-          <h3 className="text-4xl font-Tiro_Bangla">
-            {getEngToBnNumber(invoices.length)}
-          </h3>
-          <h3>মোট সদস্য-সংখ্যা</h3>
-        </div>
-        <div className="lg:border-r-2 border-b-2"></div>
-        <div className="p-4">
-          <h3 className="text-4xl font-Tiro_Bangla">
-            {getEngToBnNumber(getTotalShare(invoices))}
-          </h3>
-          <h3>শেয়ার সংখ্যা</h3>
-        </div>
-        <div className="lg:border-r-2 border-b-2"></div>
-        <div className="p-4">
-          <h3 className="text-4xl font-Tiro_Bangla">
-            {formatPrice(getTotalAmount(invoices))}
-          </h3>
-          <h3>টোটাল এমাউন্ট</h3>
-        </div>
-      </div>
+      <TotalAcounting />
     </main>
   );
 }
