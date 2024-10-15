@@ -22,6 +22,9 @@ const Navbar = () => {
           <li>
             <Link href="/total-amount">মোট অর্থ</Link>
           </li>
+          <li>
+            <Link href="/investment">ইনভেস্টমেন্টস</Link>
+          </li>
         </ul>
         <AdminDialog />
 
