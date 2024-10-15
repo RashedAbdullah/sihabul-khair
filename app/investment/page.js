@@ -8,6 +8,7 @@ const InvestmentPage = async () => {
       consumerName: "রহমত উল্লাহ",
       Amount: 5000,
       paidAmount: 2500,
+      due: 200,
       takenDate: "2023-01-15",
       paymentLastDate: "2023-06-15",
       profitAmount: 500,
@@ -17,6 +18,7 @@ const InvestmentPage = async () => {
       consumerName: "খালিদ সাইফুল্লাহ",
       Amount: 10000,
       paidAmount: 8000,
+      due: 200,
       takenDate: "2023-03-20",
       paymentLastDate: "2023-09-20",
       profitAmount: 800,
@@ -26,6 +28,7 @@ const InvestmentPage = async () => {
       consumerName: "রায়হান আহমদ",
       Amount: 15000,
       paidAmount: 15000,
+      due: 200,
       takenDate: "2022-11-30",
       paymentLastDate: "2023-05-30",
       profitAmount: 1500,
@@ -42,6 +45,11 @@ const InvestmentPage = async () => {
   );
   const totalProfitAmount = investments.reduce(
     (acc, investment) => acc + investment.profitAmount,
+    0
+  );
+
+  const deuAmount = investments.reduce(
+    (acc, investment) => acc + investment.due,
     0
   );
 
@@ -62,6 +70,9 @@ const InvestmentPage = async () => {
                 </th>
                 <th className="py-3 px-4 text-left font-semibold text-gray-700">
                   পরিশোধিত
+                </th>
+                <th className="py-3 px-4 text-left font-semibold text-gray-700">
+                  বকেয়া
                 </th>
                 <th className="py-3 px-4 text-left font-semibold text-gray-700">
                   নেওয়ার তারিখ
@@ -87,6 +98,9 @@ const InvestmentPage = async () => {
                     ৳{getEngToBnNumber(investment.paidAmount)}
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                    ৳{getEngToBnNumber(investment.due)}
+                  </td>
+                  <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
                     {new Date(investment.takenDate).toLocaleDateString("bn")}
                   </td>
                   <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
@@ -108,6 +122,9 @@ const InvestmentPage = async () => {
                 </td>
                 <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
                   ৳{getEngToBnNumber(totalPaidAmount)}
+                </td>
+                <td className="py-4 px-4 text-gray-800 font-Tiro_Bangla">
+                  ৳{getEngToBnNumber(deuAmount)}
                 </td>
                 <td className="py-4 px-4 text-gray-800"></td>
                 <td className="py-4 px-4 text-gray-800"></td>
