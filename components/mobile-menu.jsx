@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -71,7 +70,7 @@ const MobileMenu = () => {
               </Link>
             </li>
           </ul>
-          <Link href="/admin-pannel" className="text-end block">
+          <Link href="/dashboard" className="text-end block">
             <Button>এডমিন প্যানেল</Button>
           </Link>
         </div>

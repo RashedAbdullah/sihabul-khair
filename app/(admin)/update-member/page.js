@@ -4,7 +4,6 @@ import { getEngToBnNumber } from "@/utils/getEngToBn";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -13,7 +12,6 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
-import { doSignOut } from "@/actions/signout";
 import { redirect } from "next/navigation";
 
 const AdminPannelPage = async () => {
@@ -43,13 +41,11 @@ const AdminPannelPage = async () => {
         <TableBody>
           {invoices.map((invoice, ind) => (
             <TableRow key={ind}>
-              <TableCell >
-                {getEngToBnNumber(ind + 1)}
-              </TableCell>
+              <TableCell>{getEngToBnNumber(ind + 1)}</TableCell>
               <TableCell>{invoice.memberName}</TableCell>
               <TableCell>{invoice.post}</TableCell>
               <TableCell>
-                <Link href={`/admin-pannel/${invoice.id}`}>
+                <Link href={`/update-member/${invoice.id}`}>
                   <Button>তথ্য আপডেট করুন</Button>
                 </Link>
               </TableCell>
@@ -57,7 +53,7 @@ const AdminPannelPage = async () => {
           ))}
         </TableBody>
       </Table>
-      <div className="flex  justify-center gap-3 items-center align-middle mt-10">
+      {/* <div className="flex  justify-center gap-3 items-center align-middle mt-10">
         <div className="">
           <Link href="/add-new-member">
             <Button>নতুন সদস্য যুক্ত করুন !</Button>
@@ -69,7 +65,7 @@ const AdminPannelPage = async () => {
             <Button variant="destructive">লগআউট করুন !</Button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -28,7 +28,6 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="hidden md:inline-block">
-          {" "}
           <AdminDialog />
         </div>
 

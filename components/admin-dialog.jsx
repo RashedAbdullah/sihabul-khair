@@ -31,7 +31,7 @@ const AdminDialog = () => {
             </Button>
           </DialogClose>
           <DialogClose asChild className="">
-            <Link href="/admin-pannel">
+            <Link href="/dashboard">
               <Button>হ্যাঁ</Button>
             </Link>
           </DialogClose>
