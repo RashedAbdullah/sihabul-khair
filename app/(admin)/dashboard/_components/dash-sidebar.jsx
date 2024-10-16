@@ -66,7 +66,7 @@ const DashSidebar = () => {
               className="group flex items-center space-x-3 p-3 bg-gray-700 rounded-md shadow hover:bg-slate-900 transition-all duration-300"
             >
               <FaChartLine className="text-xl text-slate-400 group-hover:text-slate-300" />
-              <span className="text-lg text-gray-700 text-gray-100 group-hover:text-slate-300">
+              <span className="text-lg text-gray-100 group-hover:text-slate-300">
                 নতুন ইনভেস্ট যোগ করুন
               </span>
             </Link>
@@ -77,7 +77,7 @@ const DashSidebar = () => {
               className="group flex items-center space-x-3 p-3 bg-gray-700 rounded-md shadow hover:bg-slate-900 transition-all duration-300"
             >
               <FaEdit className="text-xl text-slate-400 group-hover:text-slate-300" />
-              <span className="text-lg text-gray-700 text-gray-100 group-hover:text-slate-300">
+              <span className="text-lg text-gray-100 group-hover:text-slate-300">
                 ইনভেস্ট আপডেট করুন
               </span>
             </Link>
