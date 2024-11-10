@@ -1,8 +1,10 @@
+import { cookies } from "next/headers";
 const { database_connection } = require("@/database/database-connection");
 const { expenseModel } = require("@/models/cost-model");
 const { replaceMongoIdInArray } = require("@/utils/replace-arr-obj");
 
 const getExpenses = async () => {
+    const cookie = cookies().get("theme");
   try {
     await database_connection();
 

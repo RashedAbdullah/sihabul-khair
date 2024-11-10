@@ -1,8 +1,10 @@
 import { database_connection } from "@/database/database-connection";
 import { investmentModel } from "@/models/investment-model";
 import { replaceMongoIdInArray } from "@/utils/replace-arr-obj";
+import { cookies } from "next/headers";
 
 const getInvestments = async () => {
+    const cookie = cookies().get("theme");
   try {
     await database_connection();
     const investments = await investmentModel.find({}).lean();
