@@ -1,5 +1,6 @@
 import { database_connection } from "@/database/database-connection";
 import { invoiceModel } from "@/models/invoice-model";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export const GET = async (req) => {
@@ -8,7 +9,10 @@ export const GET = async (req) => {
 
     const invoices = await invoiceModel.find({});
 
-    return NextResponse.json({ success: true, data: invoices });
+    return NextResponse.json(
+      { success: true, data: invoices },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   } catch (error) {
     console.error("Error fetching invoices:", error);
 
