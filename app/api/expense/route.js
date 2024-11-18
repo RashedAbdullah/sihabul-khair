@@ -2,6 +2,8 @@ import { database_connection } from "@/database/database-connection";
 import { expenseModel } from "@/models/cost-model";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async (req) => {
   try {
     await database_connection();

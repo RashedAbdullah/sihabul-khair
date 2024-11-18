@@ -1,6 +1,5 @@
 import { database_connection } from "@/database/database-connection";
 import { invoiceModel } from "@/models/invoice-model";
-import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
