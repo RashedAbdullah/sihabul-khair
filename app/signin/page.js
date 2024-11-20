@@ -20,7 +20,7 @@ const SigninPage = () => {
         console.log(response.error);
         setError(response.error.message);
       } else {
-        router.push("/admin-pannel");
+        router.push("/dashboard");
       }
     } catch (err) {
       console.log(err.message);

@@ -8,8 +8,8 @@ import { Label } from "@/components/ui/label";
 import { redirect } from "next/navigation";
 
 const AddNewMember = async () => {
-  const session = await auth();
   const invoices = await getInvoices();
+  const session = await auth();
   if (!session) {
     redirect("/signin");
   }

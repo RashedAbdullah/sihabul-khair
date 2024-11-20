@@ -1,8 +1,13 @@
 import { createNewInvest } from "@/actions/investment";
+import { auth } from "@/auth";
 import PageTitle from "@/components/page-title";
 import { redirect } from "next/navigation";
 
-const NewInvestPage = () => {
+const NewInvestPage = async() => {
+   const session = await auth();
+   if (!session) {
+     redirect("/signin");
+   }
   const handleNewInvest = async (foromData) => {
     "use server";
     try {

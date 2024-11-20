@@ -4,11 +4,33 @@ import { replaceMongoIdInArray } from "@/utils/replace-arr-obj";
 import { cookies } from "next/headers";
 
 const getInvestments = async () => {
-    const cookie = cookies().get("theme");
+  const cookie = cookies().get("theme");
   try {
     await database_connection();
     const investments = await investmentModel.find({}).lean();
     return replaceMongoIdInArray(investments);
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const getSingleInvestment = async (id) => {
+  try {
+    await database_connection();
+
+    const singleInvestment = await investmentModel.findById(id);
+    return singleInvestment;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+const updateInvestMent = async (id, data) => {
+  try {
+    await database_connection();
+
+    const investment = await investmentModel.findByIdAndUpdate(id, data);
+    return investment;
   } catch (err) {
     console.log(err.message);
   }
@@ -28,7 +50,10 @@ const getTotalInvestment = (investments) => {
   return investments.reduce((acc, investment) => acc + investment.amount, 0);
 };
 const getTotalPaidAmount = (investments) => {
-  return investments.reduce((acc, investment) => acc + investment.paidAmount, 0);
+  return investments.reduce(
+    (acc, investment) => acc + investment.paidAmount,
+    0
+  );
 };
 const getTotalProfitAmount = (investments) => {
   return investments.reduce(
@@ -51,4 +76,6 @@ export {
   getTotalPaidAmount,
   getTotalProfitAmount,
   getTotalDeuAmount,
+  updateInvestMent,
+  getSingleInvestment,
 };

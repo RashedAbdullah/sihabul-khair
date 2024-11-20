@@ -1,9 +1,14 @@
 import { createExpense } from "@/actions/expense";
+import { auth } from "@/auth";
 import PageTitle from "@/components/page-title";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const NewCostPage = () => {
+const NewCostPage = async () => {
+   const session = await auth();
+   if (!session) {
+     redirect("/signin");
+   }
   const handleNewCost = async (formData) => {
     "use server";
     try {
