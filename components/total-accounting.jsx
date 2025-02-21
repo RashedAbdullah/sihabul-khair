@@ -54,7 +54,7 @@ const TotalAcounting = async () => {
   ];
 
   return (
-    <div className="mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {items.map((item, index) => (
         <div
           key={index}
@@ -63,7 +63,7 @@ const TotalAcounting = async () => {
           }`}
         >
           <h3
-            className={`text-5xl font-bold ${
+            className={`text-3xl font-bold ${
               item.value <= 1 ? "text-red-500" : "text-gray-800"
             }`}
           >
