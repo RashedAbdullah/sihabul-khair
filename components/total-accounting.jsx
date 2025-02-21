@@ -54,7 +54,7 @@ const TotalAcounting = async () => {
   ];
 
   return (
-    <div className="container mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {items.map((item, index) => (
         <div
           key={index}

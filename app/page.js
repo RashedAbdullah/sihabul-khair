@@ -7,7 +7,7 @@ import TotalAcounting from "@/components/total-accounting";
 
 export default function Home() {
   return (
-    <main className="">
+    <main className="container">
       <div className="container lg:grid grid-cols-2 flex flex-col-reverse items-center gap-16 py-16">
         {/* Text Section */}
         <div className="flex flex-col justify-center text-center lg:text-left gap-8 lg:mt-16">
