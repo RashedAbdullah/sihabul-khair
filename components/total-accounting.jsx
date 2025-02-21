@@ -23,63 +23,55 @@ const TotalAcounting = async () => {
   const currentDeposit =
     costs + getTotalPaidAmount(investments) + getTotalProfitAmount(investments);
 
+  const items = [
+    { title: "মোট সদস্য-সংখ্যা", value: getEngToBnNumber(invoices.length) },
+    { title: "শেয়ার সংখ্যা", value: getEngToBnNumber(getTotalShare(invoices)) },
+    {
+      title: "শেয়ার বাবদ টোটাল জমা",
+      value: formatPrice(getTotalAmount(invoices)),
+    },
+    {
+      title: "ইনভেস্ট করা হয়েছে",
+      value: formatPrice(getTotalInvestment(investments)),
+    },
+    {
+      title: "ইনভেস্ট থেকে জমা",
+      value: formatPrice(getTotalPaidAmount(investments)),
+    },
+    {
+      title: "মুনাফা বাবদ টোটাল জমা",
+      value: formatPrice(getTotalProfitAmount(investments)),
+    },
+    {
+      title: "ব্যাংক ফি ও অনান্য বাবাদ খরচ",
+      value: formatPrice(getTotalCost(expenses)),
+    },
+    {
+      title: "বর্তমান জমা",
+      value: formatPrice(currentDeposit),
+      highlight: true,
+    },
+  ];
+
   return (
-    <div className="flex lg:flex-row flex-col justify-between container mt-10 flex-wrap">
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">{getEngToBnNumber(invoices.length)}</h3>
-        <h3>মোট সদস্য-সংখ্যা</h3>
-      </div>
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">
-          {getEngToBnNumber(getTotalShare(invoices))}
-        </h3>
-        <h3>শেয়ার সংখ্যা</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">{formatPrice(getTotalAmount(invoices))}</h3>
-        <h3>শেয়ার বাবদ টোটাল জমা</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">
-          {formatPrice(getTotalInvestment(investments))}
-        </h3>
-        <h3>ইনভেস্ট করা হয়েছে</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">
-          {formatPrice(getTotalPaidAmount(investments))}
-        </h3>
-        <h3>ইনভেস্ট থেকে জমা</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">
-          {formatPrice(getTotalProfitAmount(investments))}
-        </h3>
-        <h3>মুনাফা বাবদ টোটাল জমা</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl">{formatPrice(getTotalCost(expenses))}</h3>
-        <h3>ব্যাংক ফি ও অনান্য বাবাদ খরচ</h3>
-      </div>
-
-      <div className="lg:border-r-2 border-black border-b-2 lg:hidden md:block"></div>
-      <div className="p-4 md:w-full lg:w-1/2">
-        <h3 className="text-4xl font-semibold">
-          {formatPrice(currentDeposit)}
-        </h3>
-        <h3>বর্তমান জমা</h3>
-      </div>
+    <div className="container mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item, index) => (
+        <div
+          key={index}
+          className={`p-6 rounded-2xl shadow-md border border-gray-200 ${
+            item.highlight ? "bg-blue-100 border-blue-500" : "bg-white"
+          }`}
+        >
+          <h3
+            className={`text-5xl font-bold ${
+              item.value <= 1 ? "text-red-500" : "text-gray-800"
+            }`}
+          >
+            {item.value}
+          </h3>
+          <h4 className="text-lg text-gray-600 mt-2">{item.title}</h4>
+        </div>
+      ))}
     </div>
   );
 };
