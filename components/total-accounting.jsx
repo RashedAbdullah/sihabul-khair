@@ -64,9 +64,9 @@ const TotalAcounting = async () => {
         >
           <h3
             className={`text-3xl font-bold ${
-              item.value.includes("-") ? "text-red-500" : "text-gray-800"
+              item.value.includes("-") || item.value.startsWith("০.") ? "text-red-500" : "text-gray-800"
             }`}
-          > 
+          >
             {item.value}
           </h3>
           <h4 className="text-lg text-gray-600 mt-2">{item.title}</h4>
