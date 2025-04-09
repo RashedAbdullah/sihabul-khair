@@ -2,13 +2,20 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import MobileMenu from "./mobile-menu";
 import AdminDialog from "./admin-dialog";
+import Image from "next/image";
 
 const Navbar = () => {
   return (
     <nav className="sticky top-0 z-10 border-b shadow backdrop-blur-lg bg-white/30 py-3">
       <div className="container flex justify-between items-center">
         <Link href="/" className="text-2xl font-semibold">
-          <h2 className="">সিহাবুল খায়ের</h2>
+          <Image
+            height={40}
+            width={40}
+            src="/favicon.png"
+            alt="Logo"
+            className="rounded-full shadow-md"
+          />
         </Link>
         <ul className="hidden lg:flex justify-center items-center align-middle gap-10">
           <li>

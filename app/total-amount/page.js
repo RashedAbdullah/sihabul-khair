@@ -15,23 +15,20 @@ import { getInvoices, getTotalAmount } from "@/actions/getInvices";
 
 const TotalAmountPage = async () => {
   const invoices = await getInvoices();
+
   return (
-    <div className="container mx-auto mt-10">
+    <div className="container mx-auto px-4 py-10">
       <PageTitle>মোট অর্থ</PageTitle>
-      <div className="text-center mb-4">
-        <p className="text-gray-600">(জুলাই ২০২৪ থেকে জুন ২০২৫ পর্যন্ত)</p>
-      </div>
+      <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-1 mb-5">
+        (জুলাই ২০২৪ থেকে জুন ২০২৫ পর্যন্ত)
+      </p>
 
-      <div className="overflow-x-auto shadow-lg rounded-lg">
-        <Table className="w-full border border-gray-200 bg-white rounded-lg">
-          <TableCaption className="text-gray-700 font-medium text-lg">
-            সদস্যবৃন্দের টাকা পরিশোধের হিসেব ও সর্বমোট এমাউন্ট
-          </TableCaption>
-
-          <TableHeader className="bg-gray-100">
-            <TableRow className="text-center">
-              <TableHead className="p-3">ক্র.</TableHead>
-              <TableHead className="p-3">সদস্য</TableHead>
+      <div className="overflow-x-auto border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+        <Table className="min-w-full text-sm text-center text-gray-800 dark:text-gray-200">
+          <TableHeader className="bg-gradient-to-r from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-900">
+            <TableRow>
+              <TableHead className="py-3">ক্র.</TableHead>
+              <TableHead className="py-3">সদস্য</TableHead>
               {[
                 "জুলাই",
                 "আগস্ট",
@@ -45,12 +42,22 @@ const TotalAmountPage = async () => {
                 "এপ্রিল",
                 "মে",
                 "জুন",
-              ].map((month, index) => (
-                <TableHead key={index} className="p-3 text-center">
+              ].map((month, i) => (
+                <TableHead key={i} className="py-3 text-nowrap">
                   {month}
                 </TableHead>
               ))}
-              <TableHead className="p-3">মোট</TableHead>
+              <TableHead
+                className="py-3 sticky right-0 bg-gradient-to-r from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-900 border-l"
+                style={{
+                  position: "sticky",
+                  right: 0,
+                  zIndex: 1,
+                  boxShadow: "-2px 0 5px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                মোট
+              </TableHead>
             </TableRow>
           </TableHeader>
 
@@ -58,15 +65,18 @@ const TotalAmountPage = async () => {
             {invoices.map((invoice, ind) => (
               <TableRow
                 key={ind}
-                className="hover:bg-gray-50 transition duration-300"
+                className={`transition duration-300 hover:bg-blue-50 dark:hover:bg-gray-800 ${
+                  ind % 2 === 0
+                    ? "bg-white dark:bg-gray-900"
+                    : "bg-gray-50 dark:bg-gray-800"
+                }`}
               >
-                <TableCell className="text-center font-medium">
+                <TableCell className="py-2 font-bold text-blue-700 dark:text-blue-400">
                   {getEngToBnNumber(ind + 1)}
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="py-2 font-medium">
                   {invoice.memberName}
                 </TableCell>
-
                 {[
                   "July",
                   "August",
@@ -80,18 +90,25 @@ const TotalAmountPage = async () => {
                   "April",
                   "May",
                   "June",
-                ].map((month, index) => (
+                ].map((month, i) => (
                   <TableCell
-                    key={index}
-                    className={`text-center font-semibold ${
+                    key={i}
+                    className={`py-2 font-semibold ${
                       invoice[month] <= 0 ? "text-red-500" : "text-green-600"
                     }`}
                   >
                     {formatPrice(invoice[month])}
                   </TableCell>
                 ))}
-
-                <TableCell className="text-center font-bold text-blue-600">
+                <TableCell
+                  className="py-2 font-bold text-blue-700 dark:text-blue-400 sticky right-0 bg-white dark:bg-gray-900 border-r"
+                  style={{
+                    position: "sticky",
+                    right: 0,
+                    zIndex: 1,
+                    boxShadow: "-2px 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                >
                   {formatPrice(
                     invoice.July +
                       invoice.August +
@@ -112,13 +129,13 @@ const TotalAmountPage = async () => {
           </TableBody>
 
           <TableFooter>
-            <TableRow className="bg-gray-100 font-semibold">
-              <TableCell colSpan={2} className="text-center text-lg">
+            <TableRow className="bg-gradient-to-r from-sky-100 to-sky-200 dark:from-gray-700 dark:to-gray-800">
+              <TableCell colSpan={2} className="py-4 text-lg font-semibold">
                 সর্বমোট
               </TableCell>
               <TableCell
                 colSpan={12}
-                className="text-right text-lg font-bold text-blue-600 pr-5"
+                className="text-right pr-6 text-lg font-bold text-blue-800 dark:text-blue-300"
               >
                 {formatPrice(getTotalAmount(invoices))}
               </TableCell>

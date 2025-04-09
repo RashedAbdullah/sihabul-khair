@@ -13,13 +13,13 @@ const InvestmentPage = async () => {
   const options = { year: "numeric", month: "long", day: "numeric" };
 
   return (
-    <div className="min-h-screen p-8 container">
+    <div className="min-h-screen bg-gray-50 p-8 container">
       <PageTitle>ইনভেস্টমেন্টস</PageTitle>
 
       {investments.length > 0 ? (
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white shadow-md rounded-lg border border-gray-300">
-            <thead className="bg-gray-200">
+        <div className="overflow-x-auto rounded-lg shadow-xl bg-white">
+          <table className="min-w-full bg-white table-auto border-separate border-spacing-0">
+            <thead className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white">
               <tr>
                 {[
                   "কনজিউমার",
@@ -33,7 +33,7 @@ const InvestmentPage = async () => {
                 ].map((header, index) => (
                   <th
                     key={index}
-                    className="py-3 px-6 text-center font-semibold text-gray-700"
+                    className="py-4 px-6 text-center text-lg font-semibold"
                   >
                     {header}
                   </th>
@@ -45,8 +45,8 @@ const InvestmentPage = async () => {
                 <tr
                   key={investment.consumerName}
                   className={`border-b hover:bg-gray-50 ${
-                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                  }`}
+                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  } transition duration-300`}
                 >
                   <td className="py-4 px-6 text-gray-800 text-center">
                     {investment.consumerName}
@@ -77,34 +77,36 @@ const InvestmentPage = async () => {
                   <td className="py-4 px-6 text-gray-800 text-center">
                     {formatPrice(investment.profitAmount)}
                   </td>
-                  <td className="py-4 px-6 text-gray-800 text-center">চলমান</td>
+                  <td className="py-4 px-6 text-center font-semibold text-green-500">
+                    চলমান
+                  </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot>
-              <tr className="font-bold bg-gray-100">
-                <td className="py-4 px-6 text-gray-800 text-center">মোট</td>
-                <td className="py-4 px-6 text-gray-800 text-center">
+            <tfoot className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white">
+              <tr className="font-bold">
+                <td className="py-4 px-6 text-center">মোট</td>
+                <td className="py-4 px-6 text-center">
                   {formatPrice(getTotalInvestment(investments))}
                 </td>
-                <td className="py-4 px-6 text-gray-800 text-center">
+                <td className="py-4 px-6 text-center">
                   {formatPrice(getTotalPaidAmount(investments))}
                 </td>
-                <td className="py-4 px-6 text-gray-800 text-center">
+                <td className="py-4 px-6 text-center">
                   {formatPrice(getTotalDeuAmount(investments))}
                 </td>
-                <td className="py-4 px-6 text-gray-800"></td>
-                <td className="py-4 px-6 text-gray-800"></td>
-                <td className="py-4 px-6 text-gray-800 text-center">
+                <td className="py-4 px-6 text-center"></td>
+                <td className="py-4 px-6 text-center"></td>
+                <td className="py-4 px-6 text-center">
                   {formatPrice(getTotalProfitAmount(investments))}
                 </td>
-                <td className="py-4 px-6 text-gray-800"></td>
+                <td className="py-4 px-6 text-center"></td>
               </tr>
             </tfoot>
           </table>
         </div>
       ) : (
-        <p className="text-center text-gray-500">
+        <p className="text-center text-lg text-gray-500">
           কোনো ইনভেস্টমেন্ট পাওয়া যায়নি।
         </p>
       )}

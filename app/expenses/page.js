@@ -11,35 +11,50 @@ const ExpensesPage = async () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 bg-gray-50 min-h-screen">
       <PageTitle>টুকটাক খরচ</PageTitle>
 
       {expenses.length > 0 ? (
         <div className="overflow-x-auto mt-6">
-          <table className="w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
-            <thead className="bg-gray-200 dark:bg-gray-700">
+          <table className="w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+            <thead className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
               <tr>
-                <th className="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-300">কারণ</th>
-                <th className="py-3 px-4 text-left font-semibold text-gray-700 dark:text-gray-300">তারিখ</th>
-                <th className="py-3 px-4 text-right font-semibold text-gray-700 dark:text-gray-300">পরিমাণ</th>
+                <th className="py-3 px-4 text-left font-semibold text-lg">
+                  বিবরণ
+                </th>
+                <th className="py-3 px-4 text-left font-semibold text-lg">
+                  তারিখ
+                </th>
+                <th className="py-3 px-4 text-right font-semibold text-lg">
+                  পরিমাণ
+                </th>
               </tr>
             </thead>
             <tbody>
               {expenses.map((expense) => (
-                <tr key={expense.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td className="py-4 px-4 text-gray-800 dark:text-gray-300">{expense.cost}</td>
-                  <td className="py-4 px-4 text-gray-800 dark:text-gray-300">{formatDate(expense.date)}</td>
+                <tr
+                  key={expense.id}
+                  className="border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-300"
+                >
+                  <td className="py-4 px-4 text-gray-800 dark:text-gray-300">
+                    {expense.cost}
+                  </td>
+                  <td className="py-4 px-4 text-gray-800 dark:text-gray-300">
+                    {formatDate(expense.date)}
+                  </td>
                   <td className="py-4 px-4 text-right text-indigo-600 dark:text-indigo-400 font-semibold">
                     {formatPrice(expense.amount)}
                   </td>
                 </tr>
               ))}
             </tbody>
-            <tfoot>
-              <tr className="font-bold bg-gray-100 dark:bg-gray-700">
-                <td className="py-4 px-4 text-gray-800 dark:text-gray-300">মোট</td>
+            <tfoot className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+              <tr className="font-bold">
+                <td className="py-4 px-4">
+                  মোট
+                </td>
                 <td className="py-4 px-4"></td>
-                <td className="py-4 px-4 text-right text-indigo-600 dark:text-indigo-400">
+                <td className="py-4 px-4 text-right">
                   {formatPrice(getTotalCost(expenses))}
                 </td>
               </tr>

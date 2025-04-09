@@ -1,12 +1,39 @@
-import PageTitle from "@/components/page-title";
 import { policies } from "@/data/policy";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 
+export const metadata = {
+  title: "নীতিমালা | সিহাবুল খায়ের ফাউন্ডেশন",
+  description:
+    "সিহাবুল খায়ের ফাউন্ডেশনের সকল নীতিমালা এখানে বিস্তারিতভাবে দেয়া হয়েছে।",
+  keywords: [
+    "নীতিমালা",
+    "সিহাবুল খায়ের",
+    "Islamic policy",
+    "financial rules",
+    "বাংলা সমিতি",
+  ],
+  alternates: {
+    canonical: "/policy",
+  },
+  openGraph: {
+    title: "নীতিমালা | সিহাবুল খায়ের ফাউন্ডেশন",
+    description:
+      "সিহাবুল খায়ের ফাউন্ডেশনের সকল নীতিমালা এখানে বিস্তারিতভাবে দেয়া হয়েছে।",
+    url: "https://jamiatullatif.com/policy",
+    siteName: "সিহাবুল খায়ের ফাউন্ডেশন",
+    locale: "bn_BD",
+    type: "article",
+  },
+};
+
 const PolicyPage = () => {
   return (
-    <div className="container mx-auto p-6">
-      <PageTitle>নীতিমালা</PageTitle>
-      <div className="mt-6 space-y-4">
+    <main className="container mx-auto px-4 py-10">
+      <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8">
+        নীতিমালা
+      </h1>
+
+      <div className="space-y-6">
         {policies.map((policy, ind) => {
           const isImportant =
             policy.includes(
@@ -17,22 +44,31 @@ const PolicyPage = () => {
             );
 
           return (
-            <div key={ind} className="flex items-start gap-3">
-              <span className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+            <article
+              key={ind}
+              className={`flex items-start gap-3 p-4 rounded-lg ${
+                isImportant
+                  ? "bg-red-50 border-l-4 border-red-600"
+                  : "bg-gray-100 dark:bg-gray-800"
+              }`}
+            >
+              <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
                 {getEngToBnNumber(ind + 1)}.
               </span>
               <p
-                className={`text-gray-800 dark:text-gray-300 ${
-                  isImportant ? "font-semibold text-red-700" : ""
+                className={`text-gray-800 dark:text-gray-200 ${
+                  isImportant
+                    ? "font-semibold text-red-700 dark:text-red-400"
+                    : ""
                 }`}
               >
                 {policy}
               </p>
-            </div>
+            </article>
           );
         })}
       </div>
-    </div>
+    </main>
   );
 };
 
