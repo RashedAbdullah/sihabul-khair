@@ -58,18 +58,19 @@ const TotalAcounting = async () => {
       {items.map((item, index) => (
         <div
           key={index}
-          className={`p-6 rounded-2xl shadow-md border border-gray-200 ${
-            item.highlight ? "bg-blue-100 border-blue-500" : "bg-white"
-          }`}
+          className={`p-6 rounded-2xl shadow-md border border-gray-200`}
         >
           <h3
             className={`text-3xl font-bold ${
-              item.value.includes("-") || item.value.startsWith("০.") ? "text-red-500" : "text-gray-800"
-            }`}
+              item.highlight && "text-blue-600"
+            } ${
+              item.value.includes("-") ||
+              (item.value.startsWith("০.") && "text-red-500")
+            } `}
           >
             {item.value}
           </h3>
-          <h4 className="text-lg text-gray-600 mt-2">{item.title}</h4>
+          <h4 className={"text-lg text-gray-600 mt-2"}>{item.title}</h4>
         </div>
       ))}
     </div>
