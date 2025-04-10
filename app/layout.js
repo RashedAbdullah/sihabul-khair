@@ -23,7 +23,7 @@ export const metadata = {
   ],
   creator: "সিহাবুল খায়ের ফাউন্ডেশন",
   publisher: "সিহাবুল খায়ের ফাউন্ডেশন",
-  themeColor: "#0f172a",
+
   openGraph: {
     title: "সিহাবুল খায়ের ফাউন্ডেশন",
     description: "সিহাবুল খায়ের ফাউন্ডেশন একটি স্বেচ্ছাসেবী অর্থনৈতিক সংগঠন।",

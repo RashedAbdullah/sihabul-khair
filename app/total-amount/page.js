@@ -2,7 +2,6 @@ import PageTitle from "@/components/page-title";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
