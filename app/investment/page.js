@@ -12,6 +12,8 @@ const InvestmentPage = async () => {
   const investments = await getInvestments();
   const options = { year: "numeric", month: "long", day: "numeric" };
 
+  console.log(investments[0]);
+
   return (
     <div className="min-h-screen bg-gray-50 p-8 container">
       <PageTitle>ইনভেস্টমেন্টস</PageTitle>
@@ -48,7 +50,11 @@ const InvestmentPage = async () => {
                     index % 2 === 0 ? "bg-gray-100" : "bg-white"
                   } transition duration-300`}
                 >
-                  <td className="py-4 px-6 text-gray-800 text-center">
+                  <td
+                    className={`py-4 px-6 text-gray-800 text-center ${
+                      investment.status === "ক্লোজড" && "line-through"
+                    }`}
+                  >
                     {investment.consumerName}
                   </td>
                   <td className="py-4 px-6 text-gray-800 text-center">
@@ -60,14 +66,22 @@ const InvestmentPage = async () => {
                   <td className="py-4 px-6 text-gray-800 text-center">
                     {formatPrice(investment.amount - investment.paidAmount)}
                   </td>
-                  <td className="py-4 px-6 text-gray-800 text-center">
+                  <td
+                    className={`py-4 px-6 text-gray-800 text-center ${
+                      investment.status === "ক্লোজড" && "line-through"
+                    }`}
+                  >
                     {new Date(investment.takenDate).toLocaleDateString(
                       "bn",
                       options
                     )}{" "}
                     ইং
                   </td>
-                  <td className="py-4 px-6 text-gray-800 text-center">
+                  <td
+                    className={`py-4 px-6 text-gray-800 text-center ${
+                      investment.status === "ক্লোজড" && "line-through"
+                    }`}
+                  >
                     {new Date(investment.paymentLastDate).toLocaleDateString(
                       "bn",
                       options
@@ -77,8 +91,12 @@ const InvestmentPage = async () => {
                   <td className="py-4 px-6 text-gray-800 text-center">
                     {formatPrice(investment.profitAmount)}
                   </td>
-                  <td className="py-4 px-6 text-center font-semibold text-green-500">
-                    চলমান
+                  <td
+                    className={`py-4 px-6 text-center font-semibold text-green-500 ${
+                      investment.status === "ক্লোজড" && "text-red-500"
+                    }`}
+                  >
+                    {investment.status}
                   </td>
                 </tr>
               ))}
