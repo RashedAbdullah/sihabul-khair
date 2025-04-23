@@ -2,6 +2,7 @@ import { Tiro_Bangla } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const tiroBangla = Tiro_Bangla({
   subsets: ["bengali"],
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
