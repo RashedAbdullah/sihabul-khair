@@ -36,9 +36,9 @@ export default function Home() {
 
           {/* Buttons Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <Link href="/total-amount" className="w-full">
+            <Link href="/monthly-amount" className="w-full">
               <Button className="w-full px-6 py-4 text-lg font-semibold bg-blue-600 text-white hover:bg-blue-700 transition flex justify-center items-center gap-2">
-                মোট অর্থ <MoveRight />
+                মাসিক অর্থ <MoveRight />
               </Button>
             </Link>
             <Link href="/members" className="w-full">
