@@ -47,7 +47,7 @@ const AddMonthly = async () => {
         payment_date,
       };
       await addMonthlyPayment(id, newPayment);
-      console.log(newPayment, id);
+      redirect(`/members/${id}`);
     } catch (err) {
       console.error("Failed to save monthly amount:", err);
     }
