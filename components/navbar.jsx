@@ -25,7 +25,7 @@ const Navbar = () => {
             <Link href="/members">সদস্যবৃন্দ</Link>
           </li>
           <li>
-            <Link href="/total-amount">মোট অর্থ</Link>
+            <Link href="/monthly-amount">মাসিক অর্থ</Link>
           </li>
           <li>
             <Link href="/expenses">ব্যায় বিবরণ</Link>

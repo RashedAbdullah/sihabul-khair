@@ -1,114 +1,137 @@
-import { getInvoices } from "@/actions/getInvices";
 import { handleNewMember } from "@/actions/handleNewMember";
 import { auth } from "@/auth";
-import PageTitle from "@/components/page-title";
-import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  User,
+  Phone,
+  CalendarDays,
+  BadgePlus,
+  Landmark,
+  Layers,
+} from "lucide-react";
 
 const AddNewMember = async () => {
-  const invoices = await getInvoices();
   const session = await auth();
-  if (!session) {
-    redirect("/signin");
-  }
+  if (!session) redirect("/signin");
 
   return (
-    <div className="container">
-      <PageTitle>নতুন সদস্য যুক্ত করুন</PageTitle>
-      <form
-        action={handleNewMember}
-        className="flex flex-col justify-center items-center gap-5"
-      >
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="member_no">সদস্য নং: </Label>
-          <Input
-            id="member_no"
-            type="number"
-            name="invoice"
-            placeholder="সদস্য নং . . ."
-            defaultValue={invoices.length + 1}
-          />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="name">নাম: </Label>
-          <Input
-            id="name"
-            name="memberName"
-            type="text"
-            placeholder="নাম . . ."
-          />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="post">পদ: </Label>
-          <Input id="post" name="post" type="text" defaultValue={"সদস্য"} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="share">শেয়ার: </Label>
-          <Input id="share" name="totalShare" type="number" defaultValue={0} />
-        </div>
+    <section className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border p-6 md:p-8 space-y-6">
+        <h2 className="text-3xl font-bold text-center text-[#3A4C50]">
+          নতুন সদস্য যুক্ত করুন
+        </h2>
 
-        <div className="py-3 px-10 border-b-2">আর্থিক হিসাব</div>
+        <form action={handleNewMember} className="space-y-5">
+          {/* Name */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="name"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <User className="w-4 h-4" />
+              নাম
+            </Label>
+            <Input id="name" name="name" placeholder="নাম . . ." required />
+          </div>
 
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="July">জুলাই: </Label>
-          <Input id="July" name="July" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="August">আগস্ট: </Label>
-          <Input id="August" name="August" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="September">সেপ্টেম্বর: </Label>
-          <Input
-            id="September"
-            name="September"
-            type="number"
-            defaultValue={0}
-          />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="October">অক্টোবর: </Label>
-          <Input id="October" name="October" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="November">নভেম্বর: </Label>
-          <Input id="November" name="November" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="December">ডিসেম্বর: </Label>
-          <Input id="December" name="December" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="January">জানুয়ারি: </Label>
-          <Input id="January" name="January" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="February">ফেব্রুয়ারি: </Label>
-          <Input id="February" name="February" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="March">মার্চ: </Label>
-          <Input id="March" name="March" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="April">এপ্রিল: </Label>
-          <Input id="April" name="April" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="May">মে: </Label>
-          <Input id="May" name="May" type="number" defaultValue={0} />
-        </div>
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="June">জুন: </Label>
-          <Input id="June" name="June" type="number" defaultValue={0} />
-        </div>
-        <div>
-          <Button>নতুন সদস্য ‍যুক্ত করুন !</Button>
-        </div>
-      </form>
-    </div>
+          {/* Father */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="father"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <Landmark className="w-4 h-4" />
+              পিতা
+            </Label>
+            <Input
+              id="father"
+              name="father"
+              placeholder="পিতার নাম . . ."
+              required
+            />
+          </div>
+
+          {/* Contact */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="contact"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <Phone className="w-4 h-4" />
+              মোবাইল
+            </Label>
+            <Input
+              id="contact"
+              name="contact"
+              type="tel"
+              placeholder="মোবাইল নম্বর . . ."
+              required
+            />
+          </div>
+
+          {/* Membership Date */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="membershipDate"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <CalendarDays className="w-4 h-4" />
+              সদস্য হওয়ার তারিখ
+            </Label>
+            <Input
+              id="membershipDate"
+              name="membershipDate"
+              type="date"
+              required
+            />
+          </div>
+
+          {/* Post */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="post"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <BadgePlus className="w-4 h-4" />
+              পদ
+            </Label>
+            <Input id="post" name="post" defaultValue="সদস্য" required />
+          </div>
+
+          {/* Share */}
+          <div className="space-y-1">
+            <Label
+              htmlFor="share"
+              className="flex items-center gap-2 text-gray-700"
+            >
+              <Layers className="w-4 h-4" />
+              শেয়ার
+            </Label>
+            <Input
+              id="share"
+              name="totalShare"
+              type="number"
+              defaultValue={1}
+              min={1}
+              required
+            />
+          </div>
+
+          {/* Submit */}
+          <div className="pt-4">
+            <Button
+              className="w-full bg-[#3A4C50] hover:bg-[#2f3d40] text-white text-lg py-2 rounded-xl"
+              type="submit"
+            >
+              সদস্য ‍যুক্ত করুন
+            </Button>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

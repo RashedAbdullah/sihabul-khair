@@ -1,94 +1,88 @@
-import { getInvoices } from "@/actions/getInvices";
-import PageTitle from "@/components/page-title";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { getMembers } from "@/actions/members";
+import { getTotalAmount } from "@/utils/get-total-amount";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
+import {
+  User2Icon,
+  CalendarDaysIcon,
+  CoinsIcon,
+  BadgeIcon,
+} from "lucide-react";
+import Link from "next/link";
 
 const MembersPage = async () => {
-  const invoices = await getInvoices();
+  try {
+    const members = await getMembers();
 
-  return (
-    <div className="container mx-auto px-4 py-10">
-      <PageTitle>সদস্যবৃন্দের তালিকা</PageTitle>
+    return (
+      <section className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6">
+            সদস্যবৃন্দ
+          </h1>
 
-      <div className="overflow-x-auto mt-8 border border-gray-200 dark:border-gray-700">
-        <Table className="min-w-full text-sm text-center text-gray-800 dark:text-gray-200">
-          <TableHeader className="bg-gradient-to-r from-blue-100 to-blue-200 dark:from-gray-800 dark:to-gray-900">
-            <TableRow>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                ক্র.
-              </TableHead>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                সদস্য
-              </TableHead>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                পদ
-              </TableHead>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                শেয়ার
-              </TableHead>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                মোট জমা
-              </TableHead>
-              <TableHead className="text-center py-3 text-gray-700 dark:text-gray-300">
-                মেম্বারশীপ ডেট
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {invoices.map((invoice, ind) => (
-              <TableRow
-                key={ind}
-                className={`transition duration-300 ease-in-out hover:bg-blue-50 dark:hover:bg-gray-700 ${
-                  ind % 2 === 0
-                    ? "bg-white dark:bg-gray-800"
-                    : "bg-gray-50 dark:bg-gray-700"
-                }`}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {members.map((member) => (
+              <Link
+                href={`/members/${member?._id || "#"}`}
+                key={member.name}
+                className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 hover:bg-gray-100 transition-all duration-300 hover:scale-95 group"
               >
-                <TableCell className="py-3 font-bold text-blue-700 dark:text-blue-400">
-                  {getEngToBnNumber(ind + 1)}
-                </TableCell>
-                <TableCell className="py-3 font-medium">
-                  {invoice.memberName}
-                </TableCell>
-                <TableCell className="py-3">{invoice.post}</TableCell>
-                <TableCell className="py-3 font-semibold text-indigo-600 dark:text-indigo-400">
-                  {getEngToBnNumber(invoice.totalShare)}
-                </TableCell>
-                <TableCell className="py-3 font-semibold text-green-600 dark:text-green-400">
-                  {getEngToBnNumber(
-                    invoice.July +
-                      invoice.August +
-                      invoice.September +
-                      invoice.October +
-                      invoice.November +
-                      invoice.December +
-                      invoice.January +
-                      invoice.February +
-                      invoice.March +
-                      invoice.April +
-                      invoice.May +
-                      invoice.June
-                  )}
-                </TableCell>
-                <TableCell className="py-3">
-                  {invoice.membershipDate} ইং
-                </TableCell>
-              </TableRow>
+                <div className="flex items-center space-x-4 mb-4">
+                  <div className="bg-[#3A4C50] text-white p-3 rounded-full">
+                    <User2Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-800 group-hover:text-[#3A4C50] transition-colors duration-200">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm text-gray-500">{member.post}</p>
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-sm text-gray-600">
+                  <p className="flex items-center gap-2">
+                    <BadgeIcon className="h-4 w-4 text-[#3A4C50]" />
+                    মোট শেয়ার:{" "}
+                    <span className="font-medium text-gray-800">
+                      {getEngToBnNumber(member.totalShare)}
+                    </span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CoinsIcon className="h-4 w-4 text-[#3A4C50]" />
+                    মোট জমা:{" "}
+                    <span className="font-medium text-gray-800">
+                      {getTotalAmount(member.amounts.map((am) => am.amount))}{" "}
+                    </span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <CalendarDaysIcon className="h-4 w-4 text-[#3A4C50]" />
+                    সদস্যপদ গ্রহণ:{" "}
+                    <span className="text-gray-700">
+                      {new Date(member.membershipDate).toLocaleDateString(
+                        "bn",
+                        {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        }
+                      )}{" "}
+                      ইং
+                    </span>
+                  </p>
+                </div>
+              </Link>
             ))}
-          </TableBody>
-        </Table>
+          </div>
+        </div>
+      </section>
+    );
+  } catch (err) {
+    return (
+      <div className="text-center text-red-500 mt-10">
+        সদস্য তথ্য লোড করতে সমস্যা হয়েছে।
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default MembersPage;

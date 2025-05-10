@@ -14,12 +14,11 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ShieldCheck, Pencil } from "lucide-react";
 
-const AdminPannelPage = async () => {
+const AddMonthly = async () => {
   const session = await auth();
   if (!session) redirect("/signin");
 
   const invoices = await getInvoices();
-
   return (
     <section className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="container mx-auto max-w-5xl bg-white shadow-md p-6">
@@ -27,7 +26,7 @@ const AdminPannelPage = async () => {
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-green-500 pb-4">
           <h2 className="text-2xl font-bold text-[#3A4C50] flex items-center gap-2">
             <ShieldCheck className="w-6 h-6 text-green-500" />
-            সদস্য-তথ্য আপডেট করুন
+            মাসিক হিসাব আপডেট করুন
           </h2>
           <p className="text-sm text-gray-700">
             এডমিন:{" "}
@@ -58,7 +57,7 @@ const AdminPannelPage = async () => {
                   <TableCell>{invoice.memberName}</TableCell>
                   <TableCell>{invoice.post}</TableCell>
                   <TableCell>
-                    <Link href={`/update-member/${invoice.id}`}>
+                    <Link href={`/add-monthly/${invoice._id}`}>
                       <Button
                         variant="outline"
                         className="text-sm gap-2 flex items-center"
@@ -78,4 +77,4 @@ const AdminPannelPage = async () => {
   );
 };
 
-export default AdminPannelPage;
+export default AddMonthly;

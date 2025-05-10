@@ -1,0 +1,14 @@
+[
+  { "month": "January", "month_bn": "জানুয়ারি" },
+  { "month": "February", "month_bn": "ফেব্রুয়ারি" },
+  { "month": "March", "month_bn": "মার্চ" },
+  { "month": "April", "month_bn": "এপ্রিল" },
+  { "month": "May", "month_bn": "মে" },
+  { "month": "June", "month_bn": "জুন" },
+  { "month": "July", "month_bn": "জুলাই" },
+  { "month": "August", "month_bn": "আগস্ট" },
+  { "month": "September", "month_bn": "সেপ্টেম্বর" },
+  { "month": "October", "month_bn": "অক্টোবর" },
+  { "month": "November", "month_bn": "নভেম্বর" },
+  { "month": "December", "month_bn": "ডিসেম্বর" }
+]
