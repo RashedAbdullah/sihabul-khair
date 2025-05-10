@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { addMonthlyPayment, getMembers } from "@/actions/members";
+import { revalidatePath } from "next/cache";
 
 const AddMonthly = async () => {
   const session = await auth();
@@ -47,9 +48,11 @@ const AddMonthly = async () => {
         payment_date,
       };
       await addMonthlyPayment(id, newPayment);
-      redirect(`/members/${id}`);
+      revalidatePath(`/members/${id}`);
     } catch (err) {
       console.error("Failed to save monthly amount:", err);
+    } finally {
+      redirect(`/members/${id}`);
     }
   };
 
@@ -117,13 +120,13 @@ const AddMonthly = async () => {
                     <Label htmlFor="year" className="text-xs">
                       বছর
                     </Label>
-                    <Select name="year" defaultValue={currentYear}>
+                    <Select name="year" defaultValue={String(currentYear)}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="বছর" />
                       </SelectTrigger>
                       <SelectContent>
                         {[2024, 2025, 2026].map((year) => (
-                          <SelectItem key={year} value={year}>
+                          <SelectItem key={String(year)} value={String(year)}>
                             {year}
                           </SelectItem>
                         ))}
