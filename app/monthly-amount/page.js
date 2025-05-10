@@ -3,6 +3,7 @@ import { getEngToBnMonth } from "@/utils/get-eng-to-bn-month";
 import { formatPrice } from "@/lib/foramt-amount";
 import Link from "next/link";
 import { getMembers } from "@/actions/members";
+import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 const MonthlyDetails = async () => {
   const members = await getMembers();
@@ -16,7 +17,7 @@ const MonthlyDetails = async () => {
         {members.map((member) => (
           <div key={member.name} className="bg-white rounded-lg shadow p-3">
             <div className="flex justify-between items-center mb-2 border-b pb-2">
-              <Link href="/">
+              <Link href={`/members/${member._id}`}>
                 <h2 className="font-semibold">{member.name}</h2>
               </Link>
               <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
@@ -28,7 +29,8 @@ const MonthlyDetails = async () => {
               {member.amounts.reverse().map((amount) => (
                 <div key={amount.month} className="border p-2 rounded">
                   <div className="font-medium">
-                    {getEngToBnMonth(amount.month)}
+                    {getEngToBnMonth(amount.month)}{" "}
+                    {getEngToBnNumber(amount.year)}
                   </div>
                   <div className="text-gray-600 text-xs">
                     {new Date(amount.payment_date).toLocaleDateString("bn", {

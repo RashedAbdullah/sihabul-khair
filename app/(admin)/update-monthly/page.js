@@ -1,4 +1,3 @@
-import { getInvoices } from "@/actions/getInvices";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 import {
   Table,
@@ -13,12 +12,13 @@ import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { ShieldCheck, Pencil } from "lucide-react";
+import { getMembers } from "@/actions/members";
 
 const AddMonthly = async () => {
   const session = await auth();
   if (!session) redirect("/signin");
 
-  const invoices = await getInvoices();
+  const members = await getMembers();
   return (
     <section className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="container mx-auto max-w-5xl bg-white shadow-md p-6">
@@ -43,21 +43,21 @@ const AddMonthly = async () => {
               <TableRow>
                 <TableHead className="text-white">ক্র.</TableHead>
                 <TableHead className="text-white">সদস্য</TableHead>
-                <TableHead className="text-white">পদ</TableHead>
+                <TableHead className="text-white">পিতা</TableHead>
                 <TableHead className="text-white">তথ্য আপডেট</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {invoices.map((invoice, index) => (
+              {members.map((member, index) => (
                 <TableRow
-                  key={invoice.id}
+                  key={member._id}
                   className="hover:bg-gray-100 transition-colors"
                 >
                   <TableCell>{getEngToBnNumber(index + 1)}</TableCell>
-                  <TableCell>{invoice.memberName}</TableCell>
-                  <TableCell>{invoice.post}</TableCell>
+                  <TableCell>{member?.name}</TableCell>
+                  <TableCell>{member?.father}</TableCell>
                   <TableCell>
-                    <Link href={`/add-monthly/${invoice._id}`}>
+                    <Link href={`/update-monthly/${member._id}`}>
                       <Button
                         variant="outline"
                         className="text-sm gap-2 flex items-center"

@@ -1,34 +1,32 @@
 import { getExpenses, getTotalCost } from "@/actions/expense";
-import {
-  getInvoices,
-  getTotalAmount,
-  getTotalShare,
-} from "@/actions/getInvices";
+import { getTotalAmount, getTotalShare } from "@/actions/getInvices";
+import { Separator } from "@/components/ui/separator";
 import {
   getInvestments,
   getTotalInvestment,
   getTotalPaidAmount,
   getTotalProfitAmount,
 } from "@/actions/investment";
+import { getMembers } from "@/actions/members";
 import { formatPrice } from "@/lib/foramt-amount";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 
 const TotalAcounting = async () => {
-  const invoices = await getInvoices();
+  const members = await getMembers();
   const investments = await getInvestments();
   const expenses = await getExpenses();
 
-  const deposit = getTotalAmount(invoices) - getTotalInvestment(investments);
+  const deposit = getTotalAmount(members) - getTotalInvestment(investments);
   const costs = deposit - getTotalCost(expenses);
   const currentDeposit =
     costs + getTotalPaidAmount(investments) + getTotalProfitAmount(investments);
 
   const items = [
-    { title: "মোট সদস্য-সংখ্যা", value: getEngToBnNumber(invoices.length) },
-    { title: "শেয়ার সংখ্যা", value: getEngToBnNumber(getTotalShare(invoices)) },
+    { title: "মোট সদস্য-সংখ্যা", value: getEngToBnNumber(members.length) },
+    { title: "শেয়ার সংখ্যা", value: getEngToBnNumber(getTotalShare(members)) },
     {
       title: "শেয়ার বাবদ টোটাল জমা",
-      value: formatPrice(getTotalAmount(invoices)),
+      value: formatPrice(getTotalAmount(members)),
     },
     {
       title: "ইনভেস্ট করা হয়েছে",
@@ -54,25 +52,51 @@ const TotalAcounting = async () => {
   ];
 
   return (
-    <div className="mx-auto mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className={`p-6 rounded-2xl shadow-md border border-gray-200`}
-        >
-          <h3
-            className={`text-3xl font-bold ${
-              item.highlight && "text-blue-600"
-            } ${
-              item.value.includes("-") ||
-              (item.value.startsWith("০.") && "text-red-500")
-            } `}
+    <div className="space-y-8">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-black dark:text-white mb-2">
+          আর্থিক সারাংশ
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          সিহাবুল খায়ের ফাউন্ডেশনের বর্তমান আর্থিক অবস্থা ও পরিসংখ্যান
+        </p>
+        <Separator className="mt-4 max-w-md mx-auto bg-gray-300 dark:bg-gray-700" />
+      </div>
+
+      <div className="mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className={`p-6 rounded-xl transition-all duration-300 ${
+              item.highlight
+                ? "bg-green-950 dark:bg-white shadow-lg transform hover:scale-[1.02]"
+                : "bg-white dark:bg-gray-900 shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-800"
+            }`}
           >
-            {item.value}
-          </h3>
-          <h4 className={"text-lg text-gray-600 mt-2"}>{item.title}</h4>
-        </div>
-      ))}
+            <h3
+              className={`text-3xl font-bold ${
+                item.highlight
+                  ? "text-white dark:text-black"
+                  : "text-black dark:text-white"
+              } ${
+                item.value.includes("-") ||
+                (item.value.startsWith("০.") && "text-red-500")
+              }`}
+            >
+              {item.value}
+            </h3>
+            <h4
+              className={`text-lg mt-3 ${
+                item.highlight
+                  ? "text-gray-300 dark:text-gray-700"
+                  : "text-gray-600 dark:text-gray-400"
+              }`}
+            >
+              {item.title}
+            </h4>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

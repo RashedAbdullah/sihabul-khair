@@ -71,7 +71,6 @@ const addMonthlyPayment = async (id, newPayment) => {
   try {
     await database_connection();
 
-
     const updatedMember = await memberModel.findByIdAndUpdate(
       id,
       {
@@ -89,6 +88,42 @@ const addMonthlyPayment = async (id, newPayment) => {
   }
 };
 
+const upsertMonthlyPayment = async (id, payment) => {
+  try {
+    await database_connection();
+
+    // First try to update an existing payment for the same month/year
+    const result = await memberModel.updateOne(
+      {
+        _id: id,
+        "amounts.month": payment.month,
+        "amounts.year": payment.year,
+      },
+      {
+        $set: {
+          "amounts.$.amount": payment.amount,
+          "amounts.$.payment_date": payment.payment_date,
+        },
+      }
+    );
+
+    // If no existing payment was found for that month/year, push a new one
+    if (result.matchedCount === 0) {
+      await memberModel.findByIdAndUpdate(id, {
+        $push: {
+          amounts: payment,
+        },
+      });
+    }
+
+    // Return the updated member
+    return await memberModel.findById(id);
+  } catch (err) {
+    console.log(err.message);
+    throw err;
+  }
+};
+
 export {
   getMembers,
   getMember,
@@ -96,4 +131,5 @@ export {
   updateMember,
   deleteMember,
   addMonthlyPayment,
+  upsertMonthlyPayment,
 };
