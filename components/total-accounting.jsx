@@ -11,6 +11,8 @@ import { getMembers } from "@/actions/members";
 import { formatPrice } from "@/lib/foramt-amount";
 import { getEngToBnNumber } from "@/utils/getEngToBn";
 
+import AmountCard from "./amount-card";
+
 const TotalAcounting = async () => {
   const members = await getMembers();
   const investments = await getInvestments();
@@ -51,6 +53,8 @@ const TotalAcounting = async () => {
     },
   ];
 
+
+
   return (
     <div className="space-y-8">
       <div className="text-center">
@@ -65,36 +69,7 @@ const TotalAcounting = async () => {
 
       <div className="mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
         {items.map((item, index) => (
-          <div
-            key={index}
-            className={`p-6 rounded-xl transition-all duration-300 ${
-              item.highlight
-                ? "bg-green-950 dark:bg-white shadow-lg transform hover:scale-[1.02]"
-                : "bg-white dark:bg-gray-900 shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-800"
-            }`}
-          >
-            <h3
-              className={`text-3xl font-bold ${
-                item.highlight
-                  ? "text-white dark:text-black"
-                  : "text-black dark:text-white"
-              } ${
-                item.value.includes("-") ||
-                (item.value.startsWith("০.") && "text-red-500")
-              }`}
-            >
-              {item.value}
-            </h3>
-            <h4
-              className={`text-lg mt-3 ${
-                item.highlight
-                  ? "text-gray-300 dark:text-gray-700"
-                  : "text-gray-600 dark:text-gray-400"
-              }`}
-            >
-              {item.title}
-            </h4>
-          </div>
+          <AmountCard key={index} item={item} />
         ))}
       </div>
     </div>
