@@ -10,23 +10,23 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 shadow-sm backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 py-3 transition-colors duration-300">
       <div className="container flex justify-between items-center">
         {/* Logo with improved styling */}
-       <Link href="/" className="flex items-center gap-2 group">
-  <div className="relative">
-    <Image
-      height={42}
-      width={42}
-      src="/favicon.png"
-      alt="Logo"
-      className="rounded-full shadow-md border-2 border-black dark:border-white group-hover:scale-105 transition-transform duration-300"
-    />
-    <div className="absolute -bottom-1 -right-1 bg-white dark:bg-zinc-900 text-black dark:text-white text-xs px-1.5 py-0.5 rounded-full border border-zinc-300 dark:border-zinc-700">
-      <FaMosque className="w-3 h-3" />
-    </div>
-  </div>
-  <span className="hidden sm:inline-block text-xl font-bold text-black dark:text-white">
-    সিহাবুল খায়ের
-  </span>
-</Link>
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative">
+            <Image
+              height={42}
+              width={42}
+              src="/favicon.png"
+              alt="Logo"
+              className="rounded-full shadow-md border-2 border-black dark:border-white group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute -bottom-1 -right-1 bg-white dark:bg-zinc-900 text-black dark:text-white text-xs px-1.5 py-0.5 rounded-full border border-zinc-300 dark:border-zinc-700">
+              <FaMosque className="w-3 h-3" />
+            </div>
+          </div>
+          <span className="hidden sm:inline-block text-xl font-bold text-black dark:text-white">
+            সিহাবুল খায়ের
+          </span>
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden lg:flex items-center gap-8">

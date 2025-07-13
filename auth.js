@@ -4,6 +4,7 @@ import CredentialProviders from "next-auth/providers/credentials";
 import { database_connection } from "./database/database-connection";
 import { clientPromise } from "./database/client-promise";
 import { userModel } from "./models/user-model";
+import { authConfig } from "./auth.config";
 
 export const {
   handlers: { GET, POST },
@@ -14,9 +15,7 @@ export const {
   adapter: MongoDBAdapter(clientPromise, {
     databaseName: process.env.ENVIRONMENT,
   }),
-  session: {
-    strategy: "jwt",
-  },
+  ...authConfig,
   providers: [
     CredentialProviders({
       credentials: {
@@ -33,6 +32,7 @@ export const {
           });
           if (user) {
             const isMatch = user.password === credentials.password;
+            console.log("Matched auth user ", user);
             if (isMatch) {
               return user;
             } else {
@@ -47,4 +47,21 @@ export const {
       },
     }),
   ],
+  // ✅ Add these callbacks
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role;
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+      }
+      return session;
+    },
+  },
 });
