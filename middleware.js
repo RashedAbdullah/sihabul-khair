@@ -5,8 +5,8 @@ import NextAuth from "next-auth";
 const { auth } = NextAuth(authConfig);
 
 export async function middleware(request) {
-  const session = await auth(); // get user session
-  console.log(session);
+  const session = await auth();
+  // console.log("Middleware ", session.user.email);
   const { pathname } = request.nextUrl;
 
   // Public route exception (e.g., login)
@@ -24,7 +24,7 @@ export async function middleware(request) {
 
   // Restrict /dashboard or /admin to only admin users
   if (pathname.startsWith("/dashboard")) {
-    if (session.user.role !== "ADMIN") {
+    if (session.user.email !== "maarashed40@gmail.com") {
       const homeUrl = new URL("/", request.url);
       return NextResponse.redirect(homeUrl); // or show 403 page
     }

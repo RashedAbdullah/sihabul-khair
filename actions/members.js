@@ -71,6 +71,21 @@ const addMonthlyPayment = async (id, newPayment) => {
   try {
     await database_connection();
 
+    // Check if payment for the same month and year already exists
+    const member = await memberModel.findOne({
+      _id: id,
+      amounts: {
+        $elemMatch: {
+          month: newPayment.month,
+          year: newPayment.year,
+        },
+      },
+    });
+
+    if (member) {
+      throw new Error("এই মাসের টাকা অলরেডি জমা আছে।");
+    }
+
     const updatedMember = await memberModel.findByIdAndUpdate(
       id,
       {

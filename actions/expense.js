@@ -44,10 +44,24 @@ const createExpense = async (newExpense) => {
   try {
     await database_connection();
 
+    // Check if an expense with the same amount and cost already exists
+    const existingExpense = await expenseModel.findOne({
+      amount: newExpense.amount,
+      cost: newExpense.cost,
+      date: newExpense.date,
+    });
+
+    if (existingExpense) {
+      throw new Error(
+        "Expense with the same amount, cost and date already exists."
+      );
+    }
+
     const expense = await expenseModel.create(newExpense);
     return expense;
   } catch (err) {
     console.log(err.message);
+    throw err;
   }
 };
 

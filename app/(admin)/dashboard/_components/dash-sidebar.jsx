@@ -15,9 +15,9 @@ const navLinks = [
   {
     title: "মাসিক হিসাব",
     links: [
-      { href: "/add-monthly", label: "মাসিক হিসাব যুক্ত করুন", icon: FilePlus },
+      { href: "/dashboard/add-monthly", label: "মাসিক হিসাব যুক্ত করুন", icon: FilePlus },
       {
-        href: "/update-monthly",
+        href: "/dashboard/update-monthly",
         label: "মাসিক হিসাব আপডেট করুন",
         icon: FilePen,
       },
@@ -26,23 +26,23 @@ const navLinks = [
   {
     title: "সদস্য তথ্য",
     links: [
-      { href: "/add-new-member", label: "নতুন সদস্য যোগ করুন", icon: UserPlus },
-      { href: "/update-member", label: "সদস্য আপডেট করুন", icon: UserCog },
+      { href: "/dashboard/add-new-member", label: "নতুন সদস্য যোগ করুন", icon: UserPlus },
+      { href: "/dashboard/update-member", label: "সদস্য আপডেট করুন", icon: UserCog },
     ],
   },
   {
     title: "খরচ",
     links: [
-      { href: "/new-cost", label: "নতুন খরচ যোগ করুন", icon: Wallet },
-      { href: "/update-cost", label: "খরচ আপডেট করুন", icon: FilePen },
+      { href: "/dashboard/new-cost", label: "নতুন খরচ যোগ করুন", icon: Wallet },
+      { href: "/dashboard/update-cost", label: "খরচ আপডেট করুন", icon: FilePen },
     ],
   },
   {
     title: "ইনভেস্টমেন্ট",
     links: [
-      { href: "/new-invest", label: "নতুন ইনভেস্ট যোগ করুন", icon: Coins },
+      { href: "/dashboard/new-invest", label: "নতুন ইনভেস্ট যোগ করুন", icon: Coins },
       {
-        href: "/update-investment",
+        href: "/dashboard/update-investment",
         label: "ইনভেস্ট আপডেট করুন",
         icon: LineChart,
       },

@@ -25,6 +25,7 @@ export const {
       async authorize(credentials) {
         if (credentials === null) return null;
         await database_connection();
+        // console.log("credentials ", credentials);
 
         try {
           const user = await userModel.findOne({
@@ -32,7 +33,7 @@ export const {
           });
           if (user) {
             const isMatch = user.password === credentials.password;
-            console.log("Matched auth user ", user);
+            // console.log("Matched auth user ", user);
             if (isMatch) {
               return user;
             } else {
@@ -47,16 +48,19 @@ export const {
       },
     }),
   ],
-  // ✅ Add these callbacks
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        token.id = user._id?.toString?.() || user.id;
         token.role = user.role;
-        token.id = user.id;
       }
+      // console.log("JWT Token in Callback: ", token); // ✅ DEBUG
+      // console.log("jwt user ", user);
       return token;
     },
     async session({ session, token }) {
+      // console.log("Session Token ", token);
       if (token) {
         session.user.id = token.id;
         session.user.role = token.role;
