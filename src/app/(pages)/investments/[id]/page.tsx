@@ -50,8 +50,6 @@ const InvestmentDetailsPage = async ({ params }: Props) => {
       (investment.chargedAmount - investment.profit)) *
     100;
 
-  console.log("repaymentProgress ", repaymentProgress);
-
   const profitProgress = (investment.paidProfit / investment.profit) * 100;
 
   return (

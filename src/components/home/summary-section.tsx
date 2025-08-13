@@ -16,18 +16,18 @@ const SummarySection = async () => {
         title: "বকেয়া ইনভেস্ট",
         value: formatPrice(summaryData.currentInvestment),
       },
+      // {
+      //   title: "মুনাফা বাবদ টোটাল জমা",
+      //   value: formatPrice(summaryData.profitDeposits),
+      // },
+      // {
+      //   title: "বকেয়া মুনাফা",
+      //   value: formatPrice(
+      //     summaryData.totalProfit - summaryData.profitDeposits
+      //   ),
+      // },
       {
-        title: "মুনাফা বাবদ টোটাল জমা",
-        value: formatPrice(summaryData.profitDeposits),
-      },
-      {
-        title: "বকেয়া মুনাফা",
-        value: formatPrice(
-          summaryData.totalProfit - summaryData.profitDeposits
-        ),
-      },
-      {
-        title: "ইনভেস্ট থেকে জমা",
+        title: "লাভসহ ইনভেস্ট থেকে জমা",
         value: formatPrice(summaryData.paymentFromInvestment),
       },
       {

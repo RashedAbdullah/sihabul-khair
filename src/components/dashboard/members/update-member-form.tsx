@@ -59,7 +59,7 @@ const UpdateMemberForm = ({ members }: { members: IUser[] }) => {
   });
 
   const selectedMemberId = form.watch("memberId");
-  console.log("memberId: ", members);
+
 
   // When member is selected, populate form with their data
   useEffect(() => {

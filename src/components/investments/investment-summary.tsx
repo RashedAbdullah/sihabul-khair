@@ -5,7 +5,7 @@ import { summaryService } from "@/services";
 
 const InvestmentSummary = async () => {
   const summary = await summaryService.getSummary();
-  console.log(summary);
+
   const summaryData = [
     {
       title: "মোট ইনভেস্ট করা হয়েছে",

@@ -41,8 +41,6 @@ const MemberDetailsPage = async ({ params }: Props) => {
     0
   );
 
-  console.log(yearlyPayments[0]?.amount);
-
   return (
     <div className="container mx-auto py-8">
       <div className="grid gap-6">

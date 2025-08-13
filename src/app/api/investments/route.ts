@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
       status,
     } = Object.fromEntries(formData.entries());
 
-    console.log(Object.fromEntries(formData.entries()));
+
 
     // Handle case when no file is uploaded
     let agreementReponse = "";

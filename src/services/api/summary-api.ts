@@ -64,7 +64,6 @@ export const summaryService = {
       const currentDeposit =
         (paymentFromInvestment[0]?.total || 0) +
         (paymentsFromShares[0]?.total || 0) +
-        (profitsFromInvestments[0]?.total || 0) +
         (bankProfit[0]?.total || 0) +
         (yearlyPayments[0]?.total || 0) -
         (totalInvestment[0]?.total || 0) -
@@ -75,17 +74,12 @@ export const summaryService = {
         { $group: { _id: null, total: { $sum: "$profit" } } },
       ]);
 
-      console.log(totalProfit);
-
       return {
         totalInvestment: totalInvestment[0]?.total || 0,
         currentInvestment:
           (totalInvestment[0]?.total || 0) -
-          ((paymentFromInvestment[0]?.total || 0) -
-            (profitsFromInvestments[0]?.total || 0)),
-        paymentFromInvestment:
-          (paymentFromInvestment[0]?.total || 0) -
-          (profitsFromInvestments[0]?.total || 0),
+          (paymentFromInvestment[0]?.total || 0),
+        paymentFromInvestment: paymentFromInvestment[0]?.total || 0,
         paymentsFromShares:
           (paymentsFromShares[0]?.total || 0) + (yearlyPayments[0]?.total || 0),
         profitDeposits: profitsFromInvestments[0]?.total || 0,
