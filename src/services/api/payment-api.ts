@@ -61,7 +61,7 @@ export const paymentService = {
     }
   },
 
-  getPaymentsByMemberId: async (memberId : string, from: string, to: string) => {
+  getPaymentsByMemberId: async (memberId: string, from: string, to: string) => {
     try {
       await database_connection();
 
@@ -233,6 +233,13 @@ export const paymentService = {
     to: string,
     memberId: string
   ) => {
+    // ✅ Safe formatter for YYYY-MM (no timezone shift)
+    const formatYearMonth = (date: Date): string => {
+      const year = date.getUTCFullYear();
+      const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+      return `${year}-${month}`;
+    };
+
     try {
       await database_connection();
 
@@ -258,7 +265,7 @@ export const paymentService = {
         const formattedPayments: SingleUserPayment[] = payments.map(
           (payment) => ({
             _id: (payment._id as mongoose.Types.ObjectId).toString(),
-            month: payment.month.toISOString().slice(0, 7),
+            month: formatYearMonth(payment.month),
             payment: payment.payment,
             paymentDate: payment.paymentDate,
           })
@@ -280,7 +287,6 @@ export const paymentService = {
 
       // Original logic for other cases (with from/to params or all users)
       let users;
-      // If memberId is provided (with from/to), fetch only that user
       if (memberId) {
         if (!mongoose.Types.ObjectId.isValid(memberId)) {
           return { success: false, error: "Invalid user id" };
@@ -295,7 +301,6 @@ export const paymentService = {
 
       // Determine months range
       let months: string[] = [];
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let monthFilter: any = {};
 
       if (from && to) {
@@ -307,17 +312,17 @@ export const paymentService = {
         // months between fromDate and toDate inclusive
         const d = new Date(fromDate);
         while (d <= toDate) {
-          months.push(d.toISOString().slice(0, 7));
-          d.setMonth(d.getMonth() + 1);
+          months.push(formatYearMonth(d));
+          d.setUTCMonth(d.getUTCMonth() + 1); // ✅ UTC safe increment
         }
         monthFilter = {
-          $gte: new Date(months[0] + "-01"),
-          $lte: new Date(months[months.length - 1] + "-01"),
+          $gte: new Date(from + "-01"),
+          $lte: new Date(to + "-01"),
         };
       } else {
         // Default: all months for all users
         const allMonths = await paymentModel.find({}).distinct("month");
-        months = allMonths.map((d: Date) => d.toISOString().slice(0, 7));
+        months = allMonths.map((d: Date) => formatYearMonth(d));
         months.sort((a, b) => (a < b ? 1 : a > b ? -1 : 0));
         if (months.length) {
           monthFilter = {
@@ -328,7 +333,6 @@ export const paymentService = {
       }
 
       // Get all payments for these users and months
-      // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
       let paymentQuery: any = {};
       if (memberId) {
         paymentQuery.member = memberId;
@@ -346,7 +350,7 @@ export const paymentService = {
 
       for (const payment of payments) {
         const uid = payment.member._id.toString();
-        const formattedMonth = payment.month.toISOString().slice(0, 7);
+        const formattedMonth = formatYearMonth(payment.month);
         if (!userMonthMap[uid]) userMonthMap[uid] = {};
         userMonthMap[uid][formattedMonth] = {
           _id: payment._id,
@@ -359,8 +363,10 @@ export const paymentService = {
       if (!months.length) {
         const today = new Date();
         for (let i = 0; i < 3; i++) {
-          const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
-          months.push(date.toISOString().slice(0, 7));
+          const date = new Date(
+            Date.UTC(today.getUTCFullYear(), today.getUTCMonth() - i, 1)
+          );
+          months.push(formatYearMonth(date));
         }
         months = months.reverse();
       }

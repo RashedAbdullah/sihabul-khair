@@ -61,34 +61,45 @@ const getBengaliMonthName = (date: Date): string => {
   return months[date.getMonth()];
 };
 
-// Get current date in UTC
-const currentDate = new Date();
-const currentUTCDate = new Date(
-  Date.UTC(
-    currentDate.getUTCFullYear(),
-    currentDate.getUTCMonth(),
-    currentDate.getUTCDate()
-  )
-);
-
-// Calculate dates for API call using UTC
-const endDate = new Date(
-  Date.UTC(currentUTCDate.getUTCFullYear(), currentUTCDate.getUTCMonth() + 1, 1)
-); // 1st day of next month in UTC
-
-const startDate = new Date(
-  Date.UTC(currentUTCDate.getUTCFullYear(), currentUTCDate.getUTCMonth() - 2, 1)
-); // 1st day of 2 months ago in UTC
-
-// Format dates for API (YYYY-MM format)
+// Function to format date as "YYYY-MM"
 const formatDateForAPI = (date: Date): string => {
-  const year = date.getUTCFullYear();
-  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   return `${year}-${month}`;
 };
 
+// Get current date
+const currentDate = new Date();
+
+// Calculate dates for API call
+const endDate = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth() + 1,
+  1
+); // 1st day of next month
+const startDate = new Date(
+  currentDate.getFullYear(),
+  currentDate.getMonth() - 2,
+  1
+); // 1st day of 2 months ago
+
+// Format dates for API
 const endDateParam = formatDateForAPI(endDate);
 const startDateParam = formatDateForAPI(startDate);
+
+// Create array of last 3 months (current + previous 2)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const monthNames = [
+  getBengaliMonthName(
+    new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+  ),
+  getBengaliMonthName(
+    new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+  ),
+  getBengaliMonthName(
+    new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1)
+  ),
+] as const;
 
 type MonthName = (typeof monthNames)[number];
 
