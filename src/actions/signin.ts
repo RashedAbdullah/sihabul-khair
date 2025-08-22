@@ -5,20 +5,17 @@ import { userModel } from "@/models/user-model";
 import { cookies } from "next/headers";
 import { redirect, RedirectType } from "next/navigation";
 
-export const handleSigninUser = async (formData: FormData) => {
+export const onServerHandleSignin = async (email: string, password: string) => {
   try {
-    const email = formData.get("email");
-    const password = formData.get("password");
-
     if (typeof email !== "string" || typeof password !== "string") {
-      throw new Error("Invalid form submission");
+      throw new Error("সঠিক তথ্য প্রদান করুন");
     }
 
     await database_connection();
 
     const user = await userModel.findOne({ email });
     if (!user || !(await user.isPasswordCorrect(password))) {
-      throw new Error("Invalid credentials");
+      throw new Error("ইমেইল অথবা পাসওয়ার্ড ভুল");
     }
 
     const accessToken = await user.generateAccessToken();
