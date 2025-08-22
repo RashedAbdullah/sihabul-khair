@@ -157,8 +157,7 @@ export const paymentService = {
       }
 
       // Get all payments for these users and months
-      // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
-      let paymentQuery: any = {};
+      const paymentQuery: Record<string, unknown> = {};
       if (memberId) {
         paymentQuery.member = memberId;
       }
@@ -301,7 +300,7 @@ export const paymentService = {
 
       // Determine months range
       let months: string[] = [];
-      let monthFilter: any = {};
+      let monthFilter: unknown = {};
 
       if (from && to) {
         const fromDate = parseMonthString(from);
@@ -333,7 +332,7 @@ export const paymentService = {
       }
 
       // Get all payments for these users and months
-      let paymentQuery: any = {};
+      const paymentQuery: Record<string, unknown> = {};
       if (memberId) {
         paymentQuery.member = memberId;
       }
@@ -506,7 +505,7 @@ export const paymentService = {
 
       // Get all payments for these users and months
       // eslint-disable-next-line prefer-const, @typescript-eslint/no-explicit-any
-      let paymentQuery: any = {};
+      const paymentQuery: any = {};
       if (memberId) {
         paymentQuery.member = memberId;
       }
