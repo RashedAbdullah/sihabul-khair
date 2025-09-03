@@ -33,7 +33,7 @@ const HeroSection = ({
       </div>
 
       <div className="lg:pt-21 pt-5">
-        <Image src={image} alt={title} className="object-cover h-full w-full" />
+        {/* <Image src={image} alt={title} className="object-cover h-full w-full" /> */}
       </div>
     </div>
   );
