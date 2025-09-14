@@ -90,13 +90,13 @@ type MonthName = (typeof monthNames)[number];
 const MonthlyAmountPage = async () => {
   const monthNames = [
     getBengaliMonthName(
-      new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
+      new Date(currentDate.getFullYear(), currentDate.getMonth(), -1, 1)
     ),
     getBengaliMonthName(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 2)
     ),
     getBengaliMonthName(
-      new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1)
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, 3)
     ),
   ] as const;
 
